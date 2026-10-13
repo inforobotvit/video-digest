@@ -1,0 +1,65 @@
+# Local development stack (README, «Запуск локально»): nginx with frontend/dist on :80, n8n editor on :5678,
+# media service on :8000, MailHog on :8025. Prompts and fixtures are mounted from the repo. Not for a server:
+# that is infra/deploy/compose.server.yml (docs/self-hosting.md).
+services:
+  postgres:
+    image: postgres:16
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+  media:
+    build: ../media-service
+    env_file: .env
+    volumes:
+      - mediadata:/data
+    restart: unless-stopped
+    ports: ["8000:8000"]
+
+  n8n:
+    # Same pin as infra/deploy/compose.server.yml: the workflows are built and checked against this version.
+    image: n8nio/n8n:2.37.10
+    env_file: .env
+    environment:
+      # Workflows read MEDIA_URL etc. via $env, so addresses are not baked into the JSON.
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      # Prompts and fixtures are read from the repo mount, not duplicated inside nodes.
+      N8N_RESTRICT_FILE_ACCESS_TO: /data
+      # Execution data holds user content (transcripts): pruned after 7 days unless .env says otherwise.
+      EXECUTIONS_DATA_MAX_AGE: ${EXECUTIONS_DATA_MAX_AGE:-168}
+      EXECUTIONS_DATA_PRUNE: ${EXECUTIONS_DATA_PRUNE:-true}
+    ports: ["5678:5678"]
+    volumes:
+      - n8ndata:/home/node/.n8n
+      - ../n8n/prompts:/data/prompts:ro
+      - ../n8n/fixtures:/data/fixtures:ro
+      - ../n8n/pricing.json:/data/pricing.json:ro
+    depends_on: [postgres, media, gotenberg, mailhog]
+    restart: unless-stopped
+
+  gotenberg:
+    # HTML -> PDF for /api/jobs/{id}/export/digest.pdf; generated on the fly, no cache.
+    image: gotenberg/gotenberg:8
+    restart: unless-stopped
+
+  mailhog:
+    # Dev mailbox: SMTP on 1025, web UI on http://localhost:8025. Not for production.
+    image: mailhog/mailhog:v1.0.1
+    ports: ["8025:8025"]
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports: ["80:80"]
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ../frontend/dist:/usr/share/nginx/html:ro
+    depends_on: [n8n]
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  mediadata:
+  n8ndata:

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Digest · Architecture (dark)</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --paper:#111113; --ink:#f4f4f5; --font-sans:'IBM Plex Sans', system-ui, sans-serif; --font-mono:'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+    body { font-family:var(--font-sans); background:var(--paper); color:var(--ink); min-height:100vh;
+      display:flex; align-items:center; justify-content:center; padding:2rem; }
+    .frame { max-width:1280px; width:100%; }
+    svg { width:100%; display:block; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+<svg viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="vd-arch-dark-title vd-arch-dark-desc">
+<title id="vd-arch-dark-title">Video Digest – от ссылки до документа</title>
+<desc id="vd-arch-dark-desc">Архитектура сервиса: фронт и nginx, оркестрация в n8n (jobs-api, pipeline и четыре служебных флоу: llm-call, on-error, log-events, maintenance), Media Service и Postgres с пятью таблицами в одном docker compose; Cloudflare Turnstile проверяет браузер, Deepgram распознаёт речь, OpenAI делает чистку, выжимку и критику – оба провайдера заменяются локальными через переменные окружения; внизу этапы от ссылки до документа.</desc>
+<defs>
+<marker id="vd-arch-dark-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#a1a1aa"/></marker>
+<marker id="vd-arch-dark-arrow-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#5b6bb8"/></marker>
+<marker id="vd-arch-dark-arrow-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2f8a82"/></marker>
+</defs>
+<rect x="0" y="0" width="1280" height="720" fill="#111113"/>
+<text x="264" y="52" fill="#8b8b94" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.16em">КЛИЕНТ</text>
+<text x="624" y="52" fill="#8b8b94" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.16em">ОРКЕСТРАЦИЯ</text>
+<text x="888" y="52" fill="#8b8b94" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.16em">ОБРАБОТКА</text>
+<text x="1120" y="52" fill="#8b8b94" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.16em">ВНЕШНИЕ API</text>
+<rect x="48" y="68" width="936" height="500" rx="8" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.10)" stroke-width="0.8"/>
+<text x="64" y="94" fill="rgba(244,244,245,0.45)" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" letter-spacing="0.14em" data-box="48,68,936,500,12">DOCKER COMPOSE · VPS · NGINX + HTTPS · DEPLOY BY COMMIT SHA</text>
+<rect x="488" y="112" width="272" height="436" rx="8" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.10)" stroke-width="0.8"/>
+<text x="504" y="138" fill="rgba(244,244,245,0.45)" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" letter-spacing="0.14em" data-box="488,112,272,436,12">N8N · 6 ФЛОУ</text>
+<rect x="1000" y="68" width="240" height="500" rx="8" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.10)" stroke-width="0.8" stroke-dasharray="4,3"/>
+<text x="1016" y="94" fill="rgba(244,244,245,0.45)" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" letter-spacing="0.14em" data-box="1000,68,240,500,12">ЗАМЕНЯЕМЫ ЛОКАЛЬНЫМИ</text>
+<path d="M 256,180 H 304" fill="none" stroke="#2f8a82" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow-link)"/>
+<path d="M 464,180 H 504" fill="none" stroke="#2f8a82" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow-link)"/>
+<path d="M 624,216 V 272" fill="none" stroke="#5b6bb8" stroke-width="2" marker-end="url(#vd-arch-dark-arrow-accent)"/>
+<path d="M 680,144 V 108 Q 680,100 688,100 H 1112 Q 1120,100 1120,108 V 144" fill="none" stroke="#2f8a82" stroke-width="1.4" marker-end="url(#vd-arch-dark-arrow-link)"/>
+<path d="M 744,292 H 764 Q 772,292 772,284 V 188 Q 772,180 780,180 H 788" fill="none" stroke="#a1a1aa" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow)"/>
+<path d="M 744,308 H 1012" fill="none" stroke="#2f8a82" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow-link)"/>
+<path d="M 744,324 H 992 Q 1000,324 1000,332 V 448 Q 1000,456 1008,456 H 1012" fill="none" stroke="#2f8a82" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow-link)"/>
+<path d="M 744,338 H 764 Q 772,338 772,346 V 448 Q 772,456 780,456 H 788" fill="none" stroke="#a1a1aa" stroke-width="1.6" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="254" y="154" width="52" height="20" rx="2" fill="#111113"/>
+<text x="280" y="168" fill="#2f8a82" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="254,154,52,20,2">HTTPS</text>
+<rect x="462" y="154" width="44" height="20" rx="2" fill="#111113"/>
+<text x="484" y="168" fill="#2f8a82" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="462,154,44,20,2">REST</text>
+<rect x="636" y="235" width="40" height="20" rx="2" fill="#111113"/>
+<text x="656" y="249" fill="#5b6bb8" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="636,235,40,20,2">RUN</text>
+<rect x="850" y="82" width="100" height="20" rx="2" fill="#111113"/>
+<text x="900" y="96" fill="#2f8a82" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="850,82,100,20,2">SITEVERIFY</text>
+<rect x="858" y="282" width="60" height="20" rx="2" fill="#111113"/>
+<text x="888" y="296" fill="#2f8a82" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="858,282,60,20,2">AUDIO</text>
+<rect x="862" y="332" width="52" height="20" rx="2" fill="#111113"/>
+<text x="888" y="346" fill="#2f8a82" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="862,332,52,20,2">TEXT</text>
+<rect x="820" y="418" width="136" height="20" rx="2" fill="#111113"/>
+<text x="888" y="432" fill="#8b8b94" font-size="12" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" letter-spacing="0.06em" data-box="820,418,136,20,2">STATUS · RESULT</text>
+<!-- Node: Фронт -->
+<rect x="64" y="144" width="192" height="72" rx="6" fill="#111113"/>
+<rect x="64" y="144" width="192" height="72" rx="6" fill="rgba(161,161,170,0.10)" stroke="#8b8b94" stroke-width="1.2"/>
+<text x="160" y="176" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="64,144,192,72,12">Фронт</text>
+<text x="160" y="200" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="64,144,192,72,12">React · документ с глубиной</text>
+<!-- Node: nginx -->
+<rect x="304" y="144" width="160" height="72" rx="6" fill="#111113"/>
+<rect x="304" y="144" width="160" height="72" rx="6" fill="rgba(244,244,245,0.03)" stroke="rgba(244,244,245,0.30)" stroke-width="1.2"/>
+<text x="384" y="176" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="304,144,160,72,12">nginx</text>
+<text x="384" y="200" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="304,144,160,72,12">TLS · лимиты по адресу</text>
+<!-- Node: jobs-api -->
+<rect x="504" y="144" width="240" height="72" rx="6" fill="#111113"/>
+<rect x="504" y="144" width="240" height="72" rx="6" fill="#18181b" stroke="#f4f4f5" stroke-width="1.2"/>
+<text x="624" y="176" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="504,144,240,72,12">jobs-api</text>
+<text x="624" y="200" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" data-box="504,144,240,72,12">probe · jobs · feedback · limits</text>
+<!-- Node: pipeline -->
+<rect x="504" y="272" width="240" height="72" rx="6" fill="#111113"/>
+<rect x="504" y="272" width="240" height="72" rx="6" fill="rgba(91,107,184,0.14)" stroke="#5b6bb8" stroke-width="1.2"/>
+<text x="624" y="304" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="504,272,240,72,12">pipeline</text>
+<text x="624" y="328" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="504,272,240,72,12">этапы · валидация · повтор</text>
+<!-- Node: Media Service -->
+<rect x="788" y="144" width="200" height="72" rx="6" fill="#111113"/>
+<rect x="788" y="144" width="200" height="72" rx="6" fill="#18181b" stroke="#f4f4f5" stroke-width="1.2"/>
+<text x="888" y="176" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="788,144,200,72,12">Media Service</text>
+<text x="888" y="200" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" data-box="788,144,200,72,12">FastAPI · yt-dlp · ffmpeg</text>
+<!-- Node: Postgres -->
+<rect x="788" y="416" width="200" height="112" rx="6" fill="#111113"/>
+<rect x="788" y="416" width="200" height="112" rx="6" fill="rgba(244,244,245,0.05)" stroke="#a1a1aa" stroke-width="1.2"/>
+<text x="888" y="448" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="788,416,200,112,12">Postgres</text>
+<text x="888" y="472" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" data-box="788,416,200,112,12">jobs · events</text>
+<text x="888" y="490" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" data-box="788,416,200,112,12">settings · feedback</text>
+<text x="888" y="508" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" text-anchor="middle" data-box="788,416,200,112,12">turnstile_used</text>
+<!-- Node: Cloudflare Turnstile -->
+<rect x="1012" y="144" width="216" height="72" rx="6" fill="#111113"/>
+<rect x="1012" y="144" width="216" height="72" rx="6" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.35)" stroke-width="1.2"/>
+<text x="1120" y="176" fill="#f4f4f5" font-size="17" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,144,216,72,12">Cloudflare Turnstile</text>
+<text x="1120" y="200" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,144,216,72,12">виджет в браузере · siteverify</text>
+<!-- Node: Deepgram -->
+<rect x="1012" y="272" width="216" height="72" rx="6" fill="#111113"/>
+<rect x="1012" y="272" width="216" height="72" rx="6" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.35)" stroke-width="1.2"/>
+<text x="1120" y="304" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,272,216,72,12">Deepgram</text>
+<text x="1120" y="328" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,272,216,72,12">распознавание речи · nova-3</text>
+<!-- Node: OpenAI -->
+<rect x="1012" y="416" width="216" height="72" rx="6" fill="#111113"/>
+<rect x="1012" y="416" width="216" height="72" rx="6" fill="rgba(244,244,245,0.02)" stroke="rgba(244,244,245,0.35)" stroke-width="1.2"/>
+<text x="1120" y="448" fill="#f4f4f5" font-size="20" font-weight="600" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,416,216,72,12">OpenAI</text>
+<text x="1120" y="472" fill="#a1a1aa" font-size="12" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1012,416,216,72,12">чистка · выжимка · критика</text>
+<rect x="504" y="360" width="240" height="40" rx="4" fill="#18181b" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="516" y="385" fill="#f4f4f5" font-size="12" font-weight="600" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" data-box="504,360,240,40,12">llm-call</text>
+<text x="732" y="385" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="end" data-box="504,360,240,40,12">вызов модели, валидация</text>
+<rect x="504" y="404" width="240" height="40" rx="4" fill="#18181b" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="516" y="429" fill="#f4f4f5" font-size="12" font-weight="600" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" data-box="504,404,240,40,12">on-error</text>
+<text x="732" y="429" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="end" data-box="504,404,240,40,12">страховка пайплайна</text>
+<rect x="504" y="448" width="240" height="40" rx="4" fill="#18181b" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="516" y="473" fill="#f4f4f5" font-size="12" font-weight="600" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" data-box="504,448,240,40,12">log-events</text>
+<text x="732" y="473" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="end" data-box="504,448,240,40,12">события в Postgres</text>
+<rect x="504" y="492" width="240" height="40" rx="4" fill="#18181b" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="516" y="517" fill="#f4f4f5" font-size="12" font-weight="600" font-family="'IBM Plex Mono', ui-monospace, Menlo, monospace" data-box="504,492,240,40,12">maintenance</text>
+<text x="732" y="517" fill="#a1a1aa" font-size="11" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="end" data-box="504,492,240,40,12">чистка раз в час</text>
+<text x="1120" y="516" fill="#8b8b94" font-size="11.5" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1000,68,240,500,12">Локальный контур: STT и LLM</text>
+<text x="1120" y="534" fill="#8b8b94" font-size="11.5" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1000,68,240,500,12">на своих серверах, переключение</text>
+<text x="1120" y="552" fill="#8b8b94" font-size="11.5" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" data-box="1000,68,240,500,12">переменными окружения</text>
+<line x1="48" y1="596" x2="1240" y2="596" stroke="rgba(244,244,245,0.10)" stroke-width="0.8"/>
+<rect x="53" y="632" width="191" height="44" rx="4" fill="transparent" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="148" y="658" fill="#a1a1aa" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="53,632,191,44,12">ССЫЛКА ИЛИ ФАЙЛ</text>
+<line x1="248" y1="654" x2="268" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="272" y="632" width="222" height="44" rx="4" fill="transparent" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="383" y="658" fill="#a1a1aa" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="272,632,222,44,12">СУБТИТРЫ ИЛИ АУДИО</text>
+<line x1="498" y1="654" x2="518" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="522" y="632" width="138" height="44" rx="4" fill="rgba(91,107,184,0.14)" stroke="#5b6bb8" stroke-width="1"/>
+<text x="591" y="658" fill="#5b6bb8" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="522,632,138,44,12">ТРАНСКРИПТ</text>
+<line x1="664" y1="654" x2="684" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="688" y="632" width="95" height="44" rx="4" fill="transparent" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="735" y="658" fill="#a1a1aa" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="688,632,95,44,12">ЧИСТКА</text>
+<line x1="787" y1="654" x2="807" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="811" y="632" width="106" height="44" rx="4" fill="rgba(91,107,184,0.14)" stroke="#5b6bb8" stroke-width="1"/>
+<text x="864" y="658" fill="#5b6bb8" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="811,632,106,44,12">ВЫЖИМКА</text>
+<line x1="921" y1="654" x2="941" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="945" y="632" width="138" height="44" rx="4" fill="transparent" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="1014" y="658" fill="#a1a1aa" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="945,632,138,44,12">ДОП. БЛОКИ</text>
+<line x1="1087" y1="654" x2="1107" y2="654" stroke="#a1a1aa" stroke-width="1.2" marker-end="url(#vd-arch-dark-arrow)"/>
+<rect x="1111" y="632" width="116" height="44" rx="4" fill="transparent" stroke="rgba(244,244,245,0.30)" stroke-width="1"/>
+<text x="1169" y="658" fill="#a1a1aa" font-size="12" font-weight="500" font-family="'IBM Plex Sans', system-ui, sans-serif" text-anchor="middle" letter-spacing="0.12em" data-box="1111,632,116,44,12">ДОКУМЕНТ</text>
+</svg>
+  </div>
+</body>
+</html>

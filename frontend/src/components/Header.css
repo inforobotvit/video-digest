@@ -1,0 +1,199 @@
+.hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  padding: 0 20px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.hdr__left,
+.hdr__right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hdr__right {
+  gap: 6px;
+}
+.hdr__logo {
+  font: 600 14px/1 var(--font-sans);
+  color: var(--fg);
+  text-decoration: none;
+}
+.hdr__sep {
+  width: 1px;
+  height: 16px;
+  background: var(--border);
+}
+.hdr__sep--gap {
+  margin: 0 6px;
+}
+.hdr--home {
+  background: var(--bg);
+  border-bottom-color: transparent;
+}
+.hdr--home.hdr--plain,
+.hdr--home {
+  position: static;
+}
+.hdr--home:not(.hdr--plain) {
+  border-bottom-color: transparent;
+}
+.hdr__right--icons {
+  gap: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--bg-surface);
+  font: 500 13px var(--font-sans);
+  color: var(--fg);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+.btn--small {
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-s);
+  font-size: 12.5px;
+  color: var(--fg-secondary);
+}
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+.btn--icon {
+  width: 30px;
+  padding: 0;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--fg-muted);
+}
+
+.btn--open {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* «Скачать» menu (c8) */
+.dl {
+  position: relative;
+}
+.dl__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 240px;
+  padding: 4px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  font-size: 13.5px;
+  z-index: 30;
+}
+.dl__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 10px;
+  border: none;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: var(--fg-body);
+  text-align: left;
+  cursor: pointer;
+}
+.dl__item:hover,
+.dl__item:focus-visible {
+  background: var(--bg-muted);
+  color: var(--fg);
+}
+.dl__ext {
+  font: 400 11.5px var(--font-mono);
+  color: var(--fg-faint);
+}
+.dl__sep {
+  height: 1px;
+  margin: 4px 0;
+  background: var(--border);
+}
+
+.page {
+  padding: 40px 32px;
+}
+.page--narrow {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.page__title {
+  margin: 0 0 12px;
+  font: 600 22px/1.25 var(--font-sans);
+  letter-spacing: -0.01em;
+}
+.page__hint {
+  margin: 0 0 16px;
+  color: var(--fg-muted);
+}
+.page__code {
+  font: 400 12px var(--font-mono);
+  color: var(--fg-faint);
+}
+.page__list {
+  padding-left: 18px;
+  line-height: 1.8;
+}
+.page__link {
+  color: var(--fg-secondary);
+}
+
+/* Mobile (turn 4): icons only, 34px, «Новая задача» hidden, the menu opens to the left edge. */
+@media (max-width: 720px) {
+  .hdr {
+    padding: 0 12px 0 16px;
+  }
+  .hdr__new {
+    display: none;
+  }
+  .hdr__right {
+    gap: 4px;
+  }
+  .hdr__sep--gap {
+    display: none;
+  }
+  .btn--collapsible {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+    border-radius: var(--radius-m);
+  }
+  .btn--collapsible .btn__text {
+    display: none;
+  }
+  .btn--icon {
+    width: 34px;
+    height: 34px;
+  }
+  .dl__menu {
+    left: auto;
+    right: 0;
+  }
+}

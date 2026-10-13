@@ -1,0 +1,23 @@
+.foot {
+  margin-top: auto;
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 8px;
+  text-align: center;
+  font: 400 12.5px/1.4 var(--font-sans);
+  color: var(--fg-faint);
+}
+.foot a {
+  color: var(--fg-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--underline);
+}
+.foot a:hover {
+  color: var(--fg);
+}
+.foot__dot {
+  color: var(--underline);
+}

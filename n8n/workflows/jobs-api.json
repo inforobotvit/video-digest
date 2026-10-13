@@ -1,0 +1,3161 @@
+{
+  "connections": {
+    "Add estimate": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond probe",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Budget ok?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Verify needed?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Build job row": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Source known?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Check budget": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Budget ok?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Export by format": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond digest.md",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond transcript.md",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond transcript.srt",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond digest.html",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Gotenberg pdf",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Zip files + pdf",
+            "type": "main"
+          },
+          {
+            "index": 0,
+            "node": "Zip pdf",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Export error?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond export error",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Export files",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Export files": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Export by format",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Export prepare": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Export error?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Feedback check": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Feedback ok?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Feedback ok?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Insert feedback",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond feedback",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Feedback saved": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond feedback",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Feedback valid?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job for feedback",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond feedback",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Format status": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond status",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Gotenberg pdf": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond digest.pdf",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Has file?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media upload",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Media probe",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Insert feedback": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Feedback saved",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Insert job": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond 202",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Internal error": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Log internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Limits body": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond limits",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load budget": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Check budget",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Format status",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job for export": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Export prepare",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job for feedback": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Feedback check",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job for media": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media route",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job for retry": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Retry prepare",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load limits": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Add estimate",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load limits for page": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Limits body",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Log internal error": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond 500",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Log turnstile": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Turnstile ok?",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Make zip": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond all.zip",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Mark token used": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Token new?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media available?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond media redirect",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond media error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media probe": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load limits",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media re-probe": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Retry body",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media route": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media available?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media source": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Read pricing",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media upload": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load limits",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Name pdf": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Make zip",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Parse pricing": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Build job row",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Re-probe ok?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Validate job request",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond retry error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Read pricing": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Parse pricing",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Request valid?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media source",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Respond 202": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Start pipeline",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Retry body": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Re-probe ok?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Retry prepare": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Retryable?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Retryable?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media re-probe",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond retry error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Source known?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load budget",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Token new?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Turnstile verify",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Turnstile decide",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Turnstile decide": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Log turnstile",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Turnstile ok?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Insert job",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Respond error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Turnstile verify": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Turnstile decide",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Validate feedback": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Feedback valid?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Validate job request": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Request valid?",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Verify needed?": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Mark token used",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Turnstile decide",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook export": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job for export",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook feedback": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Validate feedback",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook job status": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook jobs": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Validate job request",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook limits": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load limits for page",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook media": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job for media",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook probe": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Has file?",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Webhook retry": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job for retry",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Zip files + pdf": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Name pdf",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Zip pdf": {
+      "main": [
+        [
+          {
+            "index": 1,
+            "node": "Zip files + pdf",
+            "type": "main"
+          }
+        ],
+        [
+          {
+            "index": 0,
+            "node": "Internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "name": "jobs-api",
+  "nodes": [
+    {
+      "id": "88a952b4-90be-4a07-9279-df6b31ba47bf",
+      "name": "Webhook probe",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "probe",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        0
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-probe-0000-0000-000000000001"
+    },
+    {
+      "id": "0bfdd82f-bc9a-444c-a4d1-cfc9d99221a2",
+      "name": "Has file?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ Object.keys($binary || {}).length > 0 }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        220,
+        0
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Media Service API"
+        }
+      },
+      "id": "3492dde6-1be4-4baa-8417-20ec31501354",
+      "name": "Media upload",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "inputDataFieldName": "={{ Object.keys($binary)[0] }}",
+              "name": "file",
+              "parameterType": "formBinaryData"
+            }
+          ]
+        },
+        "contentType": "multipart-form-data",
+        "method": "POST",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendBody": true,
+        "url": "={{ $env.MEDIA_URL }}/upload"
+      },
+      "position": [
+        460,
+        -100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Media Service API"
+        }
+      },
+      "id": "66a154b9-bffe-44ea-a3de-99bef2cef860",
+      "name": "Media probe",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "jsonBody": "={{ JSON.stringify({ url: $json.body.url }) }}",
+        "method": "POST",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "url": "={{ $env.MEDIA_URL }}/probe"
+      },
+      "position": [
+        460,
+        100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "25b1c092-cde3-4cf8-9aaf-49b270405fb5",
+      "name": "Load limits",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [Number($env.MAX_DURATION_SEC || 5400)] }}"
+        },
+        "query": "select coalesce((select value::numeric from settings where key = 'MAX_DURATION_SEC' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $1::numeric) as max_duration_sec"
+      },
+      "position": [
+        700,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "c3646c3f-06fa-4609-be2f-22706c2c9755",
+      "name": "Add estimate",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// too_long answer (contract section 6): the limit travels in max_duration_sec so the front never hardcodes it.\nconst tooLong = (durationSec, maxSec) => ({ statusCode: 400, body: { error: { code: 'too_long', message: `video is ${Math.round(durationSec / 60)} min, maximum is ${Math.round(maxSec / 60)} min`, max_duration_sec: maxSec } } });\n// Missing or zero duration (media-service falls back to 0.0 when the extractor has none) is a refusal:\n// such a source would pass the duration cap and get a zero cost estimate, so it would bypass the budget too.\nconst unknownDuration = () => ({ statusCode: 400, body: { error: { code: 'unknown_duration', message: 'could not determine the video duration; try another source or upload the file' } } });\n// Pass the media-service answer through and add the estimate (contract section 2).\n// The item in hand is the Load limits row (duration cap: settings table first, variable second, and the variable\n// again when the read failed – the row then carries an error and no value); the media answer is one node back, on\n// whichever branch ran (a reference to the branch that did not run throws).\nconst maxSec = Number(($input.first().json || {}).max_duration_sec) || Number($env.MAX_DURATION_SEC || 5400);\nlet resp;\ntry { resp = $('Media upload').first().json; } catch (e) { resp = $('Media probe').first().json; }\nif (resp.statusCode !== 200) return [{ json: { statusCode: resp.statusCode, body: resp.body } }];\nconst p = resp.body;\nif (!(Number(p.duration_sec) > 0)) return [{ json: unknownDuration() }];\nif (p.duration_sec > maxSec) return [{ json: tooLong(p.duration_sec, maxSec) }];\n// Rule 1.1 of docs/result-schema.md: with manual subtitles their language is the video language.\n// yt-dlp metadata said \"en\" for a video whose only manual track is \"ru\"; the pipeline then asked\n// for en subtitles and failed. The card shows the corrected language.\nconst manual = ((p.subtitles || {}).manual) || [];\nif (manual.length && !manual.includes(p.language)) p.language = manual[0];\nconst strategy = p.recommended === 'subtitles_manual' ? 'subtitles' : 'transcribe';\nconst d = p.duration_sec || 0;\nconst seconds = strategy === 'subtitles' ? 60 : Math.round(d * 0.08 + 60);\n// Per-option additions measured on the 2026-09-06 runs (gpt-4o-mini ~15 s per extraction block,\n// gpt-4.1 critique ~30 s).\nconst per_option = { glossary: 15, critique: 30, self_check: 15, action_items: 15, decisions: 15, questions: 15 };\nreturn [{ json: { statusCode: 200, body: { ...p, estimate: { seconds, strategy, per_option } } } }];\n"
+      },
+      "position": [
+        920,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "a0fefc16-ed08-464a-9da0-ac44990f775c",
+      "name": "Respond probe",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        1140,
+        0
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "7a2df419-4bf5-4b18-8029-922aeef6ae15",
+      "name": "Webhook jobs",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "jobs",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        400
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-jobs0-0000-0000-000000000002"
+    },
+    {
+      "id": "79baf931-5391-4cc0-bdcf-6e1f608511bb",
+      "name": "Validate job request",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Validate POST /api/jobs body per docs/contract-api.md section 2.\nconst body = $input.first().json.body || {};\nconst PRESETS = ['lecture', 'meeting', 'talk', 'interview', 'plain'];\n// transcript_translation was accepted here from 2026-09-04 and never produced anything (translated: null in every\n// result); removed 2026-09-17, an old client sending it gets validation_error instead of a silent nothing.\n// fact_check followed on 2026-09-17: accepted, shown as «experimental», three minutes in the estimate, never run.\nconst OPTIONS = ['glossary', 'critique', 'self_check', 'action_items', 'decisions', 'questions'];\nconst fail = (code, message) => [{ json: { ok: false, statusCode: 400, body: { error: { code, message } } } }];\nconst lang = /^[a-z]{2}$/;\n\nif (!/^[0-9a-f]{12}$/.test(String(body.source_id || ''))) return fail('validation_error', 'source_id must be 12 hex chars from /api/probe');\nif (!PRESETS.includes(body.preset)) return fail('validation_error', `preset must be one of: ${PRESETS.join(', ')}`);\nif (!lang.test(String(body.source_language || ''))) return fail('validation_error', 'source_language must be an ISO 639-1 code');\nconst output_language = body.output_language || body.source_language;\nif (!lang.test(String(output_language))) return fail('validation_error', 'output_language must be an ISO 639-1 code');\nconst options = Array.isArray(body.options) ? [...new Set(body.options)] : [];\nconst unknown = options.filter((o) => !OPTIONS.includes(o));\nif (unknown.length) return fail('validation_error', `unknown options: ${unknown.join(', ')}`);\nlet email = null;\nif (body.email) {\n  if (!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(String(body.email))) return fail('validation_error', 'email is invalid');\n  if (body.consent_152fz !== true) return fail('consent_required', 'consent_152fz must be true when email is given');\n  email = String(body.email).trim().toLowerCase();\n}\n// Turnstile token (contract section 2, step E3): passed through as is, checked after the budget in Turnstile decide.\nconst turnstile_token = typeof body.turnstile_token === 'string' && body.turnstile_token.length <= 4096 ? body.turnstile_token : null;\nreturn [{ json: { ok: true, source_id: body.source_id, preset: body.preset, source_language: body.source_language, output_language, options, email, consent_152fz: body.consent_152fz === true, turnstile_token } }];\n"
+      },
+      "position": [
+        220,
+        400
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "997c682f-710c-4533-8fe5-70e74f4796a4",
+      "name": "Request valid?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        440,
+        400
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Media Service API"
+        }
+      },
+      "id": "6fdca006-60c8-4d23-a343-789a41320156",
+      "name": "Media source",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "method": "GET",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "url": "={{ $env.MEDIA_URL }}/sources/{{ $json.source_id }}"
+      },
+      "position": [
+        660,
+        400
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "alwaysOutputData": true,
+      "id": "cf6b3d74-b953-443c-8a02-5f9fc42624e0",
+      "name": "Read pricing",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "fileSelector": "/data/pricing.json",
+        "operation": "read",
+        "options": {}
+      },
+      "position": [
+        880,
+        400
+      ],
+      "type": "n8n-nodes-base.readWriteFile",
+      "typeVersion": 1
+    },
+    {
+      "alwaysOutputData": true,
+      "id": "b2520a45-0e84-4663-893b-6f6c33e5d08e",
+      "name": "Parse pricing",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "binaryPropertyName": "data",
+        "operation": "fromJson",
+        "options": {}
+      },
+      "position": [
+        1100,
+        400
+      ],
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1
+    },
+    {
+      "id": "7613fd89-1dbf-40e2-b13f-d2f124512cc3",
+      "name": "Build job row",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// too_long answer (contract section 6): the limit travels in max_duration_sec so the front never hardcodes it.\nconst tooLong = (durationSec, maxSec) => ({ statusCode: 400, body: { error: { code: 'too_long', message: `video is ${Math.round(durationSec / 60)} min, maximum is ${Math.round(maxSec / 60)} min`, max_duration_sec: maxSec } } });\n// Missing or zero duration (media-service falls back to 0.0 when the extractor has none) is a refusal:\n// such a source would pass the duration cap and get a zero cost estimate, so it would bypass the budget too.\nconst unknownDuration = () => ({ statusCode: 400, body: { error: { code: 'unknown_duration', message: 'could not determine the video duration; try another source or upload the file' } } });\n// Turn the media-service source lookup into a jobs row (contract section 4, result-schema source block).\nconst req = $('Validate job request').first().json;\nconst resp = $('Media source').first().json;\nconst pricing = $('Parse pricing').first().json.data || {};\nif (resp.statusCode !== 200) {\n  const err = (resp.body && resp.body.error) || { code: 'media_error', message: `media service returned ${resp.statusCode}` };\n  const notFound = resp.statusCode === 404;\n  return [{ json: { ok: false, statusCode: notFound ? 404 : 502, body: { error: { code: notFound ? 'unknown_source' : err.code, message: err.message } } } }];\n}\nconst src = resp.body;\nconst probe = src.probe;\n// The source is registered in the Media Service even when /api/probe answered too_long, so the duration cap is\n// checked again on creation – in Check budget, where the effective MAX_DURATION_SEC arrives with the budget row\n// (settings table first, variable second). Only the zero-duration refusal stays here.\nif (!(Number(probe.duration_sec) > 0)) return [{ json: { ok: false, ...unknownDuration() } }];\n// Rule 1.1 of docs/result-schema.md, the same guard as in /api/probe: the subtitles branch reads\n// subs.<source_language>.json, so a language outside the manual tracks cannot be processed.\nconst manual = ((probe.subtitles || {}).manual) || [];\nlet sourceLanguage = req.source_language;\nlet languageOverride = null;\nif (probe.recommended === 'subtitles_manual' && manual.length && !manual.includes(sourceLanguage)) {\n  languageOverride = { requested: sourceLanguage, used: manual[0], reason: 'manual subtitles' };\n  sourceLanguage = manual[0];\n}\nconst ALPHABET = 'abcdefghijklmnopqrstuvwxyz0123456789';\nconst id = 'j_' + Array.from({ length: 6 }, () => ALPHABET[Math.floor(Math.random() * ALPHABET.length)]).join('');\n\nfunction playbackFor() {\n  if (src.kind === 'upload') return { kind: 'audio', url: `/api/jobs/${id}/media`, has_video: false };\n  const url = src.url || '';\n  if (probe.platform === 'youtube') {\n    const m = url.match(/(?:v=|youtu\\.be\\/|shorts\\/|embed\\/)([A-Za-z0-9_-]{11})/);\n    return { kind: 'youtube', url: m ? `https://www.youtube.com/embed/${m[1]}` : url, has_video: true };\n  }\n  if (probe.platform === 'vk' || probe.platform === 'rutube') return { kind: probe.platform, url, has_video: true };\n  return { kind: 'direct', url, has_video: /\\.(mp4|webm|mov|mkv)(\\?|$)/i.test(url) };\n}\n\nconst source = {\n  type: src.kind === 'upload' ? 'upload' : 'url',\n  url: src.url,\n  platform: probe.platform,\n  title: probe.title,\n  duration_sec: probe.duration_sec,\n  thumbnail_url: probe.thumbnail_url,\n  language: sourceLanguage,\n  language_detected_by: manual.length ? 'subtitles' : null,\n  language_confidence: null,\n  playback: playbackFor(),\n};\nconst stages = ['probe', 'download', 'transcribe', 'clean', 'digest', 'extras'].map((name) => ({ name, status: 'pending' }));\n// estimate_sec: the same arithmetic the front does on the form (contract section 2, /api/probe).\n// The preset only sets the defaults of the checkboxes on the front (2026-09-30, step E4): `options` is the final\n// list of extras blocks, a preset adds nothing on its own – `preset: lecture, options: []` runs without a glossary.\nconst PER_OPTION = { glossary: 15, critique: 30, self_check: 15, action_items: 15, decisions: 15, questions: 15 };\nconst d = probe.duration_sec || 0;\nlet estimate = probe.recommended === 'subtitles_manual' ? 60 : Math.round(d * 0.08 + 60);\nfor (const b of new Set(req.options)) estimate += PER_OPTION[b] || 0;\n// estimated_cost_usd (contract section 7, DAILY_BUDGET_USD): STT at the STT_MODEL price from pricing.json,\n// zero when manual subtitles replace transcription, plus a flat LLM allowance per minute of video.\n// LLM_EST_USD_PER_MIN from the measured runs (2026-09-16): the LLM share (clean, digest, extras) per minute\n// of video was 0.00043 USD with gpt-5.6-luna on reduce and 0.00124 with gpt-4.1 (lecture + critique),\n// 0.00076 for a 72-minute podcast with translation; 0.0015 keeps 1.2x headroom over the dearest case.\n// Short videos break the proportion (fixed prompt overhead: a 5-minute job cost 0.0164), hence the floor.\n// The constant will have to depend on the model once more than one reduce model is in use (debt).\n// A wrong estimate corrects itself: the estimate is only reserved while the job is queued/processing;\n// once it is done the budget counts the real total_cost_usd instead.\nconst LLM_EST_USD_PER_MIN = 0.0015;\nconst LLM_EST_MIN_USD = 0.02;\n// pricing.json is read with onError = continueRegularOutput: a missing or broken price file must not stop\n// the service from accepting jobs, a rough estimate is enough for the budget check. Without the file, or\n// for a model the file does not know, the STT price is the dearest known one (whisper-1), so the estimate\n// errs on the side of the budget. Degrading beats refusing: an over-estimate frees itself when the job is done.\nconst STT_FALLBACK_USD_PER_MIN = 0.006;\nconst sttModel = String($env.STT_MODEL || 'whisper-1');\nconst sttPrices = pricing.stt || {};\nconst knownStt = Object.values(sttPrices).map((x) => Number((x || {}).per_minute) || 0).filter((x) => x > 0);\nconst sttPerMin = (sttPrices[sttModel] || {}).per_minute || (knownStt.length ? Math.max(...knownStt) : STT_FALLBACK_USD_PER_MIN);\nconst minutes = d / 60;\nconst sttCost = probe.recommended === 'subtitles_manual' ? 0 : minutes * sttPerMin;\nconst estimatedCost = Math.round((sttCost + Math.max(LLM_EST_MIN_USD, minutes * LLM_EST_USD_PER_MIN)) * 10000) / 10000;\nconst meta = { created_at: new Date().toISOString(), estimate_sec: estimate, estimated_cost_usd: estimatedCost, stages: [], probe: { recommended: probe.recommended, subtitles: probe.subtitles, language: probe.language } };\n// Versions of the tools behind the probe (media service /sources/{id}, 2026-09-21): when an extractor breaks, old\n// jobs must tell \"yt-dlp broke\" from \"we broke\" – yt-dlp, its EJS solver, the JS runtime and ffmpeg.\nif (src.tools) meta.tools = src.tools;\nif (languageOverride) meta.language_override = languageOverride;\nreturn [{ json: {\n  ok: true, id, duration_sec: probe.duration_sec,\n  p_stages: JSON.stringify(stages), p_source: JSON.stringify(source), p_options: JSON.stringify(req.options), p_meta: JSON.stringify(meta),\n  source_id: req.source_id, source_language: sourceLanguage, preset: req.preset, output_language: req.output_language,\n  email: req.email || '-', // '-' = no email: the Postgres node drops empty query parameters\n  consent: req.consent_152fz,\n  estimated_cost_usd: estimatedCost,\n} }];\n"
+      },
+      "position": [
+        1320,
+        400
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "736e61ac-95c1-46a2-9b74-7658ede4c11e",
+      "name": "Source known?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        1540,
+        400
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "2ab045a0-beb5-4732-9e48-8b5683290799",
+      "name": "Load budget",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [Number($env.MAX_JOB_MINUTES || 60), Number($env.DAILY_BUDGET_USD || 6), Number($env.MAX_CONCURRENT_JOBS || 2), Number($env.MAX_DURATION_SEC || 5400), ['enforce', 'monitor', 'off'].includes(String($env.TURNSTILE_MODE || '')) ? String($env.TURNSTILE_MODE) : 'monitor'] }}"
+        },
+        "query": "with lim as (\n  select coalesce((select value::numeric from settings where key = 'MAX_JOB_MINUTES' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $1::numeric) as max_job_minutes,\n         coalesce((select value::numeric from settings where key = 'DAILY_BUDGET_USD' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $2::numeric) as budget_usd,\n         coalesce((select value::numeric from settings where key = 'MAX_CONCURRENT_JOBS' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $3::numeric) as max_concurrent,\n         coalesce((select value::numeric from settings where key = 'MAX_DURATION_SEC' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $4::numeric) as max_duration_sec,\n         coalesce((select value from settings where key = 'TURNSTILE_MODE' and value in ('enforce', 'monitor', 'off')), $5::text) as turnstile_mode\n), running as (\n  select id from jobs\n  where status in ('queued', 'processing') and created_at > now() - ((select max_job_minutes from lim) * interval '1 minute')\n)\nselect\n  coalesce(sum(case when j.id not in (select id from running) then coalesce(j.total_cost_usd,\n    (select sum((s->>'cost_usd')::numeric) from jsonb_array_elements(coalesce(j.meta->'stages', '[]'::jsonb)) s)) end), 0) as spent_usd,\n  coalesce(sum(case when j.id in (select id from running) then (j.meta->>'estimated_cost_usd')::numeric end), 0) as reserved_usd,\n  (select count(*) from running) as running_jobs,\n  (select budget_usd from lim) as budget_usd,\n  (select max_concurrent from lim) as max_concurrent,\n  (select max_duration_sec from lim) as max_duration_sec,\n  (select max_job_minutes from lim) as max_job_minutes,\n  (select turnstile_mode from lim) as turnstile_mode\nfrom jobs j\nwhere j.created_at > now() - interval '24 hours' or j.id in (select id from running)"
+      },
+      "position": [
+        1760,
+        400
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "aed6e495-a1b2-4110-9a5e-a45dcbb5b861",
+      "name": "Check budget",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// too_long answer (contract section 6): the limit travels in max_duration_sec so the front never hardcodes it.\nconst tooLong = (durationSec, maxSec) => ({ statusCode: 400, body: { error: { code: 'too_long', message: `video is ${Math.round(durationSec / 60)} min, maximum is ${Math.round(maxSec / 60)} min`, max_duration_sec: maxSec } } });\n// Missing or zero duration (media-service falls back to 0.0 when the extractor has none) is a refusal:\n// such a source would pass the duration cap and get a zero cost estimate, so it would bypass the budget too.\nconst unknownDuration = () => ({ statusCode: 400, body: { error: { code: 'unknown_duration', message: 'could not determine the video duration; try another source or upload the file' } } });\n// Duration cap, daily budget and concurrency checks, before the job is inserted (contract section 2).\n// Order of refusals on creation: unknown_duration (Build job row) -> too_long -> daily_limit -> busy (here).\n// daily_limit before busy: with the budget gone, \"try again in a few minutes\" would be misleading.\n// The limits arrive with the budget row: settings table first, the variable second (Load budget).\nconst row = $('Build job row').first().json;\nconst sums = $input.first().json || {};\nconst maxSec = Number(sums.max_duration_sec) || Number($env.MAX_DURATION_SEC || 5400);\nif (Number(row.duration_sec) > maxSec) return [{ json: { ok: false, ...tooLong(row.duration_sec, maxSec) } }];\nconst budget = Number(sums.budget_usd) || Number($env.DAILY_BUDGET_USD || 6);\nconst spent = Number(sums.spent_usd) || 0;\nconst reserved = Number(sums.reserved_usd) || 0;\nconst estimate = Number(row.estimated_cost_usd) || 0;\n// The check and the insert are two statements, so two requests arriving together can both pass:\n// the overrun is bounded by one job estimate. Accepted, an advisory lock is not worth it yet.\nif (spent + reserved + estimate > budget) {\n  return [{ json: { ok: false, statusCode: 429, body: { error: { code: 'daily_limit', message: `daily budget of the service is exhausted (spent ${spent.toFixed(2)} + reserved ${reserved.toFixed(2)} + this job ${estimate.toFixed(2)} > ${budget.toFixed(2)} USD); try again tomorrow` } } } }];\n}\n// Concurrency: running_jobs uses the same MAX_JOB_MINUTES window as the reserve, a job stuck in processing\n// must not hold a slot forever. Same race as above: two requests together may both pass, one job over.\nconst maxConcurrent = sums.max_concurrent !== undefined && sums.max_concurrent !== null ? Number(sums.max_concurrent) : Number($env.MAX_CONCURRENT_JOBS || 2);\nconst running = Number(sums.running_jobs) || 0;\nif (running >= maxConcurrent) {\n  return [{ json: { ok: false, statusCode: 429, body: { error: { code: 'busy', message: `${running} of ${maxConcurrent} job slots are taken; try again in a few minutes` } } } }];\n}\n// The token travels with the row from here on (Build job row keeps only what the jobs row needs).\nreturn [{ json: { ...row, turnstile_mode: ['enforce', 'monitor', 'off'].includes(String(sums.turnstile_mode)) ? String(sums.turnstile_mode) : 'monitor', turnstile_token: $('Validate job request').first().json.turnstile_token || null } }];\n"
+      },
+      "position": [
+        1980,
+        400
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "e4ee1ecb-d360-4e4f-8760-2f87e57843cb",
+      "name": "Budget ok?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        2200,
+        400
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "id": "a0d9351a-1aa5-42b8-86b3-88362da0bfe2",
+      "name": "Verify needed?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.turnstile_mode !== 'off' && !!$json.turnstile_token }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        2420,
+        200
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "13d64898-8384-414b-818d-99b293c9d151",
+      "name": "Mark token used",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.turnstile_token] }}"
+        },
+        "query": "with gc as (delete from turnstile_used where used_at < now() - interval '10 minutes') insert into turnstile_used (token_hash) values (encode(sha256(convert_to($1, 'utf8')), 'hex')) on conflict (token_hash) do nothing returning token_hash"
+      },
+      "position": [
+        2640,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "b48d6d6a-4d0b-4a47-ac9f-9d38bf4523eb",
+      "name": "Token new?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ !!$json.token_hash }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        2860,
+        0
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "httpCustomAuth": {
+          "name": "Turnstile"
+        }
+      },
+      "id": "851d3a51-0360-4fe9-9b4b-ee5ca1b45a81",
+      "name": "Turnstile verify",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "authentication": "genericCredentialType",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "response",
+              "value": "={{ $('Check budget').first().json.turnstile_token }}"
+            }
+          ]
+        },
+        "contentType": "form-urlencoded",
+        "genericAuthType": "httpCustomAuth",
+        "method": "POST",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 5000
+        },
+        "sendBody": true,
+        "specifyBody": "keypair",
+        "url": "https://challenges.cloudflare.com/turnstile/v0/siteverify"
+      },
+      "position": [
+        3080,
+        -100
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "id": "02b5a4b5-4aa8-4746-acb9-c2e3057b1572",
+      "name": "Turnstile decide",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Verdict on the Turnstile token: events for the table, and the 403 body in enforce mode.\nconst row = $('Check budget').first().json;\nconst mode = row.turnstile_mode || 'monitor';\nconst token = row.turnstile_token || null;\nconst HOSTS = String($env.TURNSTILE_HOSTNAMES || 'digest.inforobot.space,localhost,127.0.0.1').split(',').map((h) => h.trim().toLowerCase()).filter(Boolean);\nlet verify = null;\ntry { if ($('Turnstile verify').isExecuted) verify = $('Turnstile verify').first().json; } catch (e) { verify = null; }\n// Our replay guard: Mark token used ran and returned no token_hash – the same token was verified before.\nlet duplicate = false;\ntry { if ($('Mark token used').isExecuted) duplicate = !(($('Mark token used').first().json || {}).token_hash); } catch (e) { duplicate = false; }\nconst events = [];\nlet refuse = null; // { code, message } for enforce\nconst ev = (type, body) => events.push({ type, level: 'warn', stage: 'create', provider: 'cloudflare', body: String(body).slice(0, 280) });\nif (mode !== 'off') {\n  // Wording: log-events masks «token <word>» as a credential, so these bodies avoid the word.\n  if (!token) {\n    ev('turnstile_missing', `Turnstile: POST /api/jobs without a response (mode ${mode}, source ${row.source_id})`);\n    refuse = { code: 'bot_check_failed', message: 'the browser check did not complete; reload the page and try again' };\n  } else if (duplicate) {\n    ev('turnstile_failed', `Turnstile: the same response was verified before (mode ${mode}), error-codes=duplicate`);\n    refuse = { code: 'bot_check_failed', message: 'the browser check was already used; reload the page and try again' };\n  } else if (!verify || !verify.statusCode) {\n    ev('turnstile_unreachable', `siteverify gave no answer (mode ${mode}): ${String((verify && (verify.error && verify.error.message || verify.error)) || 'no response').slice(0, 160)}`);\n  } else if (verify.statusCode !== 200) {\n    ev('turnstile_unreachable', `siteverify answered HTTP ${verify.statusCode} (mode ${mode})`);\n  } else {\n    const b = verify.body || {};\n    const hostOk = HOSTS.includes(String(b.hostname || '').toLowerCase());\n    const actionOk = b.action === 'create_job';\n    if (b.success === true && hostOk && actionOk) {\n      // accepted\n    } else {\n      const codes = Array.isArray(b['error-codes']) ? b['error-codes'].join(',') : '';\n      ev('turnstile_failed', `siteverify refused (mode ${mode}): success=${b.success === true}, action=${b.action || '-'}, hostname=${b.hostname || '-'}, error-codes=${codes || '-'}`);\n      refuse = { code: 'bot_check_failed', message: 'the browser check failed; reload the page and try again' };\n    }\n  }\n}\nconst ok = mode !== 'enforce' || !refuse;\n// Events of a created job carry its id (the day-of-post analysis joins them to jobs); a refusal has no job.\nreturn [{ json: { ...row, ok, statusCode: ok ? undefined : 403, body: ok ? undefined : { error: refuse }, events, job_id: ok ? row.id : '-' } }];\n"
+      },
+      "position": [
+        2860,
+        200
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "3148e4f2-4af5-41a4-8014-b0c1a4644ce3",
+      "name": "Log turnstile",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "log-events",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            },
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "events",
+              "id": "events",
+              "removed": false,
+              "required": false,
+              "type": "array"
+            }
+          ],
+          "value": {
+            "events": "={{ $json.events || [] }}",
+            "job_id": "={{ $json.job_id || ($json.job && $json.job.id) || '' }}"
+          }
+        }
+      },
+      "position": [
+        3080,
+        200
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    },
+    {
+      "id": "a89c6cb4-76b4-4357-ab51-a3befb9f16a9",
+      "name": "Turnstile ok?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        3300,
+        200
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "e06790fe-c673-486c-bcdf-b6e420f75147",
+      "name": "Insert job",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.id, $json.p_stages, $json.source_id, $json.p_source, $json.source_language, $json.preset, $json.output_language, $json.p_options, $json.email, $json.consent, $json.p_meta] }}"
+        },
+        "query": "insert into jobs (id, status, stages, source_id, source, source_language, preset, output_language, options, email, consent_152fz, meta)\nvalues ($1, 'queued', $2::jsonb, $3, $4::jsonb, $5, $6, $7, array(select jsonb_array_elements_text($8::jsonb)), nullif($9, '-'), $10::boolean, $11::jsonb)\nreturning id"
+      },
+      "position": [
+        2420,
+        400
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "5a40f8b9-6d96-450d-9fc4-930d7c698d1a",
+      "name": "Respond 202",
+      "parameters": {
+        "options": {
+          "responseCode": 202
+        },
+        "respondWith": "json",
+        "responseBody": "={{ { job_id: $json.id, status: 'queued', url: '/jobs/' + $json.id } }}"
+      },
+      "position": [
+        2640,
+        400
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "f0e003cc-7693-4412-91e4-76680d8cc3ff",
+      "name": "Start pipeline",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "pipeline",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [
+            "job_id"
+          ],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "value": {
+            "job_id": "={{ $json.id }}"
+          }
+        }
+      },
+      "position": [
+        2860,
+        400
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    },
+    {
+      "id": "ab8f55ad-4100-4e81-80ec-d3bd06ead512",
+      "name": "Respond error",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        2200,
+        620
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "bb1dd0ec-9a17-4710-908c-60384a3c66b8",
+      "name": "Webhook job status",
+      "parameters": {
+        "httpMethod": "GET",
+        "options": {},
+        "path": "job-status",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        900
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-jobs1-0000-0000-000000000003"
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "0f60f5db-cc28-4fd4-a83b-1d8d72b8a381",
+      "name": "Load job",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ $json.query.job_id || '-' }}"
+        },
+        "query": "select j.id, j.status, j.stages, j.source, j.result, j.error, j.meta, j.preset, j.options, j.email, j.created_at, j.finished_at from (select 1) one left join jobs j on j.id = $1"
+      },
+      "position": [
+        220,
+        900
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "285c5684-4a29-44e6-8992-b993e3472a8e",
+      "name": "Format status",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// GET /api/jobs/{job_id} response (contract section 2).\nconst row = $input.first().json;\nif (!row || !row.id) return [{ json: { statusCode: 404, body: { error: { code: 'not_found', message: 'job not found' } } } }];\nconst s = row.source || {};\nconst meta = row.meta || {};\nconst ms = Object.fromEntries((meta.stages || []).map((st) => [st.name, st.ms]));\nconst stages = (row.stages || []).map((st) => (st.status === 'done' && ms[st.name] !== undefined ? { ...st, ms: ms[st.name] } : st));\nconst iso = (t) => (t ? new Date(t).toISOString() : null);\nreturn [{ json: { statusCode: 200, body: {\n  job_id: row.id, status: row.status, created_at: iso(row.created_at), finished_at: iso(row.finished_at),\n  estimate_sec: meta.estimate_sec ?? null, preset: row.preset, options: row.options || [], email: row.email || null,\n  stages,\n  source: { title: s.title, duration_sec: s.duration_sec, thumbnail_url: s.thumbnail_url, platform: s.platform, language: s.language, url: s.url || null },\n  result: row.result, error: row.error,\n} } }];\n"
+      },
+      "position": [
+        440,
+        900
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "c2bd5137-3722-41d5-9b9f-a467c389e107",
+      "name": "Respond status",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        660,
+        900
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "2e1e24e1-211e-461a-8b4e-a27b188ad552",
+      "name": "Webhook limits",
+      "parameters": {
+        "httpMethod": "GET",
+        "options": {},
+        "path": "limits",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        4100
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-limit-0000-0000-000000000008"
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "fa1b17e6-ad3d-428f-af7b-e30724db7455",
+      "name": "Load limits for page",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [Number($env.MAX_DURATION_SEC || 5400)] }}"
+        },
+        "query": "select coalesce((select value::numeric from settings where key = 'MAX_DURATION_SEC' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $1::numeric) as max_duration_sec"
+      },
+      "position": [
+        220,
+        4100
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "72cf3a4b-533c-4065-b5d0-019601d70ca8",
+      "name": "Limits body",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "const row = $input.first().json || {};\nconst max_duration_sec = Number(row.max_duration_sec) || Number($env.MAX_DURATION_SEC || 5400);\nconst upload_max_mb = Number($env.UPLOAD_MAX_MB || 200);\nreturn [{ json: { statusCode: 200, body: { max_duration_sec, upload_max_mb } } }];\n"
+      },
+      "position": [
+        440,
+        4100
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "9932d7c8-377a-4110-9635-f927f8d8f619",
+      "name": "Respond limits",
+      "parameters": {
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Cache-Control",
+                "value": "no-store"
+              }
+            ]
+          }
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        660,
+        4100
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "ed8aaa34-d2ea-42cf-83b5-ae12f028c8db",
+      "name": "Webhook retry",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "job-retry",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        2700
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-retry-0000-0000-000000000007"
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "a133fa6f-daa1-48d7-8fc2-28d8b1e21c8e",
+      "name": "Load job for retry",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ $json.query.job_id || '-' }}"
+        },
+        "query": "select j.id, j.status, j.result, j.source, j.source_id, j.preset, j.source_language, j.output_language, j.options, j.email, j.consent_152fz from (select 1) one left join jobs j on j.id = $1"
+      },
+      "position": [
+        220,
+        2700
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "92b8b27a-f236-46c0-ae32-62a65d29c6ee",
+      "name": "Retry prepare",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// POST /api/jobs/{id}/retry: same parameters, new job (contract section 2).\nconst row = $input.first().json;\nif (!row || !row.id) return [{ json: { ok: false, statusCode: 404, body: { error: { code: 'not_found', message: 'job not found' } } } }];\nconst src = row.source || {};\nif (row.status !== 'failed' && !(row.status === 'done' && !row.result)) return [{ json: { ok: false, statusCode: 409, body: { error: { code: 'not_retryable', message: `job is ${row.status}` } } } }];\nif (!src.url) return [{ json: { ok: false, statusCode: 410, body: { error: { code: 'source_gone', message: 'uploaded file is no longer available; upload it again' } } } }];\nreturn [{ json: { ok: true, url: src.url, source_id: row.source_id, preset: row.preset, source_language: row.source_language, output_language: row.output_language, options: row.options || [], email: row.email || null, consent_152fz: row.consent_152fz === true } }];\n"
+      },
+      "position": [
+        440,
+        2700
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "8296aa62-be52-463c-8743-ed9bcdc0e082",
+      "name": "Retryable?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        660,
+        2700
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Media Service API"
+        }
+      },
+      "id": "b9a9397c-b570-41c5-8fdb-924e07df71a5",
+      "name": "Media re-probe",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "jsonBody": "={{ JSON.stringify({ url: $json.url }) }}",
+        "method": "POST",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "url": "={{ $env.MEDIA_URL }}/probe"
+      },
+      "position": [
+        880,
+        2700
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "id": "25e2112e-742a-4d40-a277-21ffc2b00c9e",
+      "name": "Retry body",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Re-probe done: build the POST /api/jobs body the regular validation understands.\nconst prev = $('Retry prepare').first().json;\nconst resp = $input.first().json;\nif (resp.statusCode !== 200) {\n  const err = (resp.body && resp.body.error) || { code: 'probe_failed', message: `probe returned ${resp.statusCode}` };\n  return [{ json: { ok: false, statusCode: resp.statusCode === 403 ? 403 : 502, body: { error: err } } }];\n}\nconst body = { source_id: resp.body.source_id, source_language: prev.source_language, preset: prev.preset, output_language: prev.output_language, options: prev.options };\nif (prev.email) { body.email = prev.email; body.consent_152fz = prev.consent_152fz; }\nreturn [{ json: { body } }];\n"
+      },
+      "position": [
+        1100,
+        2700
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "dfb7e1f1-9d62-4041-a6a0-e7f168ff034a",
+      "name": "Re-probe ok?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok !== false }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        1320,
+        2700
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "id": "8e3679bd-81d8-489d-a306-5f11ccead60b",
+      "name": "Respond retry error",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        880,
+        2900
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "7b135c04-24e3-47e7-8d14-4ec981ff3d6d",
+      "name": "Webhook export",
+      "parameters": {
+        "httpMethod": "GET",
+        "options": {},
+        "path": "job-export",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        1300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-expo0-0000-0000-000000000005"
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "c8b2b25b-bc5c-4fcb-9308-5baf5141f923",
+      "name": "Load job for export",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ $json.query.job_id || '-' }}"
+        },
+        "query": "select j.id, j.status, j.result from (select 1) one left join jobs j on j.id = $1"
+      },
+      "position": [
+        220,
+        1300
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "24fc76f7-76f8-42ee-9b0a-1f988e37d977",
+      "name": "Export prepare",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Build md / srt / html from jobs.result (docs/result-schema.md section 8).\nconst q = $('Webhook export').first().json.query || {};\nconst row = $input.first().json;\nconst fmt = String(q.format || '');\nconst FORMATS = ['digest.md', 'transcript.md', 'transcript.srt', 'digest.html', 'digest.pdf', 'all.zip'];\nif (!row || !row.id) return [{ json: { error: true, statusCode: 404, body: { error: { code: 'not_found', message: 'job not found' } } } }];\nif (!FORMATS.includes(fmt)) return [{ json: { error: true, statusCode: 400, body: { error: { code: 'bad_format', message: `format must be one of ${FORMATS.join(', ')}` } } } }];\n// done without a result: expired by the maintenance flow (contract section 4); 410, not 409, the file will not come back.\nif (row.status === 'done' && !row.result) return [{ json: { error: true, statusCode: 410, body: { error: { code: 'gone', message: 'result removed after the retention period' } } } }];\nif (row.status !== 'done') return [{ json: { error: true, statusCode: 409, body: { error: { code: 'not_ready', message: `job is ${row.status}` } } } }];\nconst r = row.result;\nconst src = r.source;\nconst hms = (t) => { t = Math.max(0, Math.round(Number(t))); const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60; return (h ? `${h}:` : '') + `${h ? String(m).padStart(2, '0') : m}:${String(s).padStart(2, '0')}`; };\nconst link = (t) => {\n  const sec = Math.max(0, Math.floor(Number(t)));\n  if (src.platform === 'youtube' && src.url) return `[${hms(t)}](${src.url}${src.url.includes('?') ? '&' : '?'}t=${sec}s)`;\n  if ((src.platform === 'vk' || src.platform === 'rutube') && src.url) return `[${hms(t)}](${src.url}${src.url.includes('?') ? '&' : '?'}t=${sec})`;\n  return `[${hms(t)}]`;\n};\nconst esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');\nconst EXTRAS_TITLES = { glossary: 'Глоссарий', self_check: 'Вопросы для самопроверки', critique: 'Критика аргументации', decisions: 'Решения', action_items: 'Задачи', questions: 'Открытые вопросы' };\nconst ex = r.extras || {};\nconst md = [];\nmd.push(`# ${r.source.title}`, '', `Источник: ${src.url ? src.url : 'загруженный файл'} · ${hms(src.duration_sec)} · ${src.platform}`, '', '## Коротко', '', r.digest.tldr, '', '## Структура', '');\nfor (const p of r.digest.structure) md.push(`- ${link(p.start)} **${p.title}** — ${p.summary}`);\nmd.push('', '## Тезисы', '');\nr.digest.key_points.forEach((k, i) => md.push(`${i + 1}. **${k.text}** ${link(k.start)}`, `   ${k.detail}`, ''));\nmd.push('## Цитаты', '');\nfor (const qt of r.digest.quotes) md.push(`> ${qt.text}${qt.translation ? `\\n> — ${qt.translation}` : ''} ${link(qt.start)}`, '');\nfor (const key of Object.keys(EXTRAS_TITLES)) {\n  const v = ex[key]; if (!v) continue;\n  md.push(`## ${EXTRAS_TITLES[key]}`, '');\n  if (key === 'glossary') for (const g of v) md.push(`- **${g.term}** — ${g.definition} ${link(g.start)}`);\n  else if (key === 'self_check') v.forEach((s, i) => md.push(`${i + 1}. ${s.question} ${link(s.start)}`, `   *${s.answer}*`, ''));\n  else if (key === 'critique') { md.push('**Сильные стороны**', ''); for (const x of v.strong) md.push(`- ${x}`); md.push('', '**Слабые места**', ''); for (const w of v.weak) md.push(`- ${w.claim} ${link(w.start)}`, `  ${w.issue}`); md.push('', '**Чего не хватает**', ''); for (const x of v.missing) md.push(`- ${x}`); }\n  else if (key === 'action_items') for (const a of v) md.push(`- ${a.text}${a.owner ? ` — ${a.owner}` : ''}${a.due ? `, ${a.due}` : ''} ${link(a.start)}`);\n  else for (const x of v) md.push(`- ${x.text} ${link(x.start)}`);\n  md.push('');\n}\nconst finishedText = new Date(r.meta.finished_at).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }).replace(/\\s*г\\.$/, '');\n// result.notices, the same wording as the page: number and places, never the text of what was lost.\nconst NOTICE = { transcript_shortened: (n) => `Транскрипт мог быть сокращён: при очистке речи модель местами убирает больше, чем слова-паразиты; в ${n} ${n % 10 === 1 && n % 100 !== 11 ? 'месте' : 'местах'} текст мог остаться короче сказанного`, clean_fallback: (n) => `На ${n} ${n === 1 ? 'участке' : 'участках'} речь очищена программно, без модели: слова-паразиты убраны, предложения могли остаться менее гладкими` };\nconst noticeLines = (r.notices || []).map((n) => `> ${(NOTICE[n.kind] || ((k) => `${n.kind}: ${k}`))(n.places)}. Места: ${n.starts.map((t) => link(t)).join(' ')}`);\nif (noticeLines.length) md.push('', ...noticeLines.flatMap((l) => [l, '']));\nmd.push('---', `Video Digest · ${finishedText}`);\nconst digestMd = md.join('\\n') + '\\n';\nconst transcriptMd = [`# ${r.source.title} — транскрипт`, '', ...noticeLines.flatMap((l) => [l, '']), ...r.transcript.clean.map((p) => `**[${hms(p.start)}]** ${p.text}\\n`)].join('\\n');\nconst srtTime = (t) => { const ms = Math.round(Number(t) * 1000); const h = Math.floor(ms / 3600000), m = Math.floor((ms % 3600000) / 60000), s = Math.floor((ms % 60000) / 1000), f = ms % 1000; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')},${String(f).padStart(3, '0')}`; };\nconst srt = r.transcript.segments.map((sg, i) => `${i + 1}\\n${srtTime(sg.start)} --> ${srtTime(sg.end)}\\n${sg.text}\\n`).join('\\n') + '\\n';\n// html: a small markdown-to-html for the subset we emit (headings, lists, bold, blockquote, links)\nconst inline = (t) => esc(t).replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>').replace(/\\*(.+?)\\*/g, '<em>$1</em>').replace(/\\[([^\\]]+)\\]\\((https?:[^)]+)\\)/g, '<a href=\"$2\">$1</a>');\nconst htmlBody = [];\nlet list = null;\nconst closeList = () => { if (list) { htmlBody.push(`</${list}>`); list = null; } };\nfor (const line of digestMd.split('\\n')) {\n  if (/^# /.test(line)) { closeList(); htmlBody.push(`<h1>${inline(line.slice(2))}</h1>`); }\n  else if (/^## /.test(line)) { closeList(); htmlBody.push(`<h2>${inline(line.slice(3))}</h2>`); }\n  else if (/^- /.test(line)) { if (list !== 'ul') { closeList(); htmlBody.push('<ul>'); list = 'ul'; } htmlBody.push(`<li>${inline(line.slice(2))}</li>`); }\n  else if (/^\\d+\\. /.test(line)) { if (list !== 'ol') { closeList(); htmlBody.push('<ol>'); list = 'ol'; } htmlBody.push(`<li>${inline(line.replace(/^\\d+\\. /, ''))}</li>`); }\n  else if (/^   /.test(line) && list) { htmlBody[htmlBody.length - 1] = htmlBody[htmlBody.length - 1].replace(/<\\/li>$/, `<br><span class=\"detail\">${inline(line.trim())}</span></li>`); }\n  else if (/^> /.test(line)) { closeList(); htmlBody.push(`<blockquote>${inline(line.slice(2))}</blockquote>`); }\n  else if (line === '---') { closeList(); htmlBody.push('<hr>'); }\n  else if (line.trim()) { closeList(); htmlBody.push(`<p>${inline(line)}</p>`); }\n}\ncloseList();\nconst html = `<!doctype html><html lang=\"${r.output_language}\"><head><meta charset=\"utf-8\"><title>${esc(r.source.title)}</title><style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 20px;line-height:1.5;color:#222}h1{font-size:1.6em}h2{font-size:1.2em;margin-top:1.6em;border-bottom:1px solid #ddd}blockquote{border-left:3px solid #999;margin:0.6em 0;padding:0.2em 1em;color:#444}a{color:#1a5fb4;text-decoration:none}.detail{color:#555}hr{border:0;border-top:1px solid #ddd;margin-top:2em}</style></head><body>${htmlBody.join('\\n')}</body></html>`;\n// result.json: speaker numbers are local to a 600-second chunk (19 numbers on a meeting of fewer than ten people,\n// a new number for the same voice at every boundary) – labels that look like attribution and are not are worse\n// than none, so the export carries speaker: null until the numbering is continuous (decision 2026-09-17).\nconst tr = r.transcript || {};\nconst exported = { ...r, transcript: { ...tr, segments: (tr.segments || []).map((sg) => ({ ...sg, speaker: null })) } };\nreturn [{ json: { error: false, format: fmt, job_id: row.id, digest_md: digestMd, transcript_md: transcriptMd, srt, html, result_json: JSON.stringify(exported, null, 2) } }];\n"
+      },
+      "position": [
+        440,
+        1300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "f9054bb7-d295-48c7-a46a-094548dead3a",
+      "name": "Export error?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.error }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        660,
+        1300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "id": "b569b74d-c6c6-40de-9ba8-4c127b567ad4",
+      "name": "Export files",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Build the export files as binaries (Convert to File drops the item json, a Code node keeps both).\nconst p = $('Export prepare').first().json;\nconst bin = (text, fileName, mimeType) => ({ data: Buffer.from(String(text), 'utf8').toString('base64'), fileName, mimeType, fileExtension: fileName.split('.').pop() });\nreturn [{ json: { job_id: p.job_id, format: p.format }, binary: {\n  md: bin(p.digest_md, 'digest.md', 'text/markdown; charset=utf-8'),\n  tmd: bin(p.transcript_md, 'transcript.md', 'text/markdown; charset=utf-8'),\n  srt: bin(p.srt, 'transcript.srt', 'application/x-subrip; charset=utf-8'),\n  html: bin(p.html, 'index.html', 'text/html; charset=utf-8'),   // Gotenberg needs index.html\n  dhtml: bin(p.html, 'digest.html', 'text/html; charset=utf-8'),\n  json: bin(p.result_json, 'result.json', 'application/json; charset=utf-8'),\n} }];\n"
+      },
+      "position": [
+        1100,
+        1300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "c5156f80-e619-4ab1-9f05-19dacdad85e9",
+      "name": "Export by format",
+      "parameters": {
+        "options": {},
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g1",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "digest.md"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "digest.md",
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g2",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "transcript.md"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "transcript.md",
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g3",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "transcript.srt"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "transcript.srt",
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g4",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "digest.html"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "digest.html",
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g5",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "digest.pdf"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "digest.pdf",
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "combinator": "and",
+                "conditions": [
+                  {
+                    "id": "g6",
+                    "leftValue": "={{ $json.format }}",
+                    "operator": {
+                      "operation": "equals",
+                      "type": "string"
+                    },
+                    "rightValue": "all.zip"
+                  }
+                ],
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "loose",
+                  "version": 2
+                }
+              },
+              "outputKey": "all.zip",
+              "renameOutput": true
+            }
+          ]
+        }
+      },
+      "position": [
+        1320,
+        1300
+      ],
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4
+    },
+    {
+      "id": "aca3ada0-671b-4ae2-b7cd-1f0f7192566d",
+      "name": "Respond digest.md",
+      "parameters": {
+        "inputFieldName": "md",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['md'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        1540,
+        1000
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "b77424a9-2234-4e69-af39-b3a07b10cf05",
+      "name": "Respond transcript.md",
+      "parameters": {
+        "inputFieldName": "tmd",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['tmd'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        1540,
+        1150
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "39414c44-5c23-49c8-a416-371dfd0802a6",
+      "name": "Respond transcript.srt",
+      "parameters": {
+        "inputFieldName": "srt",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['srt'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        1540,
+        1300
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "acaaffdb-37f2-4794-97e7-d9c1ffbb4cc0",
+      "name": "Respond digest.html",
+      "parameters": {
+        "inputFieldName": "dhtml",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['dhtml'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        1540,
+        1450
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "f4d6c67d-29f2-410d-8ed5-724494db8740",
+      "name": "Gotenberg pdf",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "bodyParameters": {
+          "parameters": [
+            {
+              "inputDataFieldName": "html",
+              "name": "files",
+              "parameterType": "formBinaryData"
+            },
+            {
+              "name": "marginTop",
+              "value": "0.6"
+            },
+            {
+              "name": "marginBottom",
+              "value": "0.6"
+            }
+          ]
+        },
+        "contentType": "multipart-form-data",
+        "method": "POST",
+        "options": {
+          "response": {
+            "response": {
+              "outputPropertyName": "pdf",
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 60000
+        },
+        "sendBody": true,
+        "url": "={{ $env.GOTENBERG_URL || 'http://gotenberg:3000' }}/forms/chromium/convert/html"
+      },
+      "position": [
+        1320,
+        1700
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "id": "2e7baa18-a20c-44f6-8a57-9595a291701d",
+      "name": "Respond digest.pdf",
+      "parameters": {
+        "inputFieldName": "pdf",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['pdf'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        1760,
+        1700
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "2fc63dfd-a9f9-40bc-ab7a-8377dee7a502",
+      "name": "Zip pdf",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "bodyParameters": {
+          "parameters": [
+            {
+              "inputDataFieldName": "html",
+              "name": "files",
+              "parameterType": "formBinaryData"
+            },
+            {
+              "name": "marginTop",
+              "value": "0.6"
+            },
+            {
+              "name": "marginBottom",
+              "value": "0.6"
+            }
+          ]
+        },
+        "contentType": "multipart-form-data",
+        "method": "POST",
+        "options": {
+          "response": {
+            "response": {
+              "outputPropertyName": "pdf",
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 60000
+        },
+        "sendBody": true,
+        "url": "={{ $env.GOTENBERG_URL || 'http://gotenberg:3000' }}/forms/chromium/convert/html"
+      },
+      "position": [
+        2200,
+        1900
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "id": "b5c54ef5-532d-4fcc-80b3-afb3d4325361",
+      "name": "Zip files + pdf",
+      "parameters": {
+        "combineBy": "combineByPosition",
+        "mode": "combine",
+        "options": {
+          "includeUnpaired": false
+        }
+      },
+      "position": [
+        2420,
+        1980
+      ],
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2
+    },
+    {
+      "id": "32c0cfee-3d5a-49ac-a64e-7c06cf9dd1c8",
+      "name": "Name pdf",
+      "parameters": {
+        "jsCode": "// Gotenberg names the pdf with a uuid; the archive needs digest.pdf.\nconst items = $input.all();\nif (items[0].binary && items[0].binary.pdf) items[0].binary.pdf.fileName = 'digest.pdf';\nreturn items;"
+      },
+      "position": [
+        2540,
+        1980
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "6c421d1c-e793-4088-b7ef-e1ebe21b549d",
+      "name": "Make zip",
+      "parameters": {
+        "binaryPropertyName": "md,tmd,srt,dhtml,json,pdf",
+        "binaryPropertyOutput": "zip",
+        "fileName": "={{ $('Export prepare').first().json.job_id }}-all.zip",
+        "operation": "compress",
+        "outputFormat": "zip"
+      },
+      "position": [
+        2700,
+        1980
+      ],
+      "type": "n8n-nodes-base.compression",
+      "typeVersion": 1.1
+    },
+    {
+      "id": "9a45e934-d0c7-4a56-ae64-c9c2c8a80335",
+      "name": "Respond all.zip",
+      "parameters": {
+        "inputFieldName": "zip",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Disposition",
+                "value": "=attachment; filename=\"{{ $('Export prepare').first().json.job_id }}-{{ $('Export prepare').first().json.format }}\""
+              },
+              {
+                "name": "Content-Type",
+                "value": "={{ $binary['zip'].mimeType }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "binary",
+        "responseDataSource": "set"
+      },
+      "position": [
+        2860,
+        1980
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "ef2c94bd-aa84-43df-bd38-27813fb118da",
+      "name": "Respond export error",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        880,
+        1500
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "5c20b640-87fd-46d0-8e5b-c25fe4f8ac71",
+      "name": "Webhook media",
+      "parameters": {
+        "httpMethod": "GET",
+        "options": {},
+        "path": "job-media",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        2300
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-media-0000-0000-000000000006"
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "e5873f90-6c85-451a-813e-a39d4aba080d",
+      "name": "Load job for media",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ $json.query.job_id || '-' }}"
+        },
+        "query": "select j.id, j.source_id, j.source from (select 1) one left join jobs j on j.id = $1"
+      },
+      "position": [
+        220,
+        2300
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "afb96cb6-bf75-4f83-badb-fd46ef71f691",
+      "name": "Media route",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Playback for uploads only: hand the file over to nginx via X-Accel-Redirect (Range stays native).\nconst row = $input.first().json;\nif (!row || !row.id) return [{ json: { statusCode: 404, body: { error: { code: 'not_found', message: 'job not found' } } } }];\nconst pb = ((row.source || {}).playback) || {};\nif (pb.kind !== 'audio') return [{ json: { statusCode: 404, body: { error: { code: 'no_media', message: 'playback is served by the platform player; use source.playback.url' } } } }];\nreturn [{ json: { statusCode: 200, redirect: `/media-internal/${row.source_id}/playback.mp3` } }];\n"
+      },
+      "position": [
+        440,
+        2300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "7b148d16-be09-469b-a024-e78b7ab6a67d",
+      "name": "Media available?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.statusCode === 200 }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        660,
+        2300
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "id": "1077f3fa-b32c-4f30-a573-c64ed9bbdfc7",
+      "name": "Respond media redirect",
+      "parameters": {
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "X-Accel-Redirect",
+                "value": "={{ $json.redirect }}"
+              },
+              {
+                "name": "Content-Type",
+                "value": "audio/mpeg"
+              }
+            ]
+          }
+        },
+        "respondWith": "noData"
+      },
+      "position": [
+        880,
+        2200
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "323d4aea-75b4-4767-a4c7-9f32b68b8cfe",
+      "name": "Respond media error",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        880,
+        2400
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "7cd238e2-a127-4c71-b761-1b2f74f31f7d",
+      "name": "Webhook feedback",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "feedback",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        3700
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "webhookId": "6f1c5a1e-feedb-0000-0000-000000000007"
+    },
+    {
+      "id": "3d6ff3bc-108a-43ef-9876-16b701c5ab5a",
+      "name": "Validate feedback",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// Validate POST /api/feedback per docs/contract-api.md section 2.\nconst body = $input.first().json.body || {};\nconst fail = (code, message, status = 400) => [{ json: { ok: false, statusCode: status, body: { error: { code, message } } } }];\nconst score = (v) => Number.isInteger(v) && v >= 1 && v <= 5;\nif (!/^j_[a-z0-9]{6}$/.test(String(body.job_id || ''))) return fail('validation_error', 'job_id must be a job id like j_abc123');\nif (!score(body.fits)) return fail('validation_error', 'fits must be an integer from 1 to 5');\nif (!score(body.easy)) return fail('validation_error', 'easy must be an integer from 1 to 5');\nconst comment = body.comment === undefined || body.comment === null ? '' : String(body.comment).trim();\nif (comment.length > 500) return fail('validation_error', 'comment must be at most 500 characters');\nconst via = body.via === undefined ? 'button' : String(body.via);\nif (!['timer', 'button'].includes(via)) return fail('validation_error', \"via must be 'timer' or 'button'\");\n// '-' stands for an empty comment: the Postgres node drops empty query parameters.\nreturn [{ json: { ok: true, job_id: body.job_id, fits: body.fits, easy: body.easy, comment: comment || '-', via } }];\n"
+      },
+      "position": [
+        220,
+        3700
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "dfa6a6f2-5364-43e9-84c9-975e8b67724a",
+      "name": "Feedback valid?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        440,
+        3700
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "a5b6b864-b77e-4d38-9f09-cb38a42370f5",
+      "name": "Load job for feedback",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id] }}"
+        },
+        "query": "select j.id, j.status, (f.job_id is not null) as rated from (select 1) one left join jobs j on j.id = $1 left join feedback f on f.job_id = j.id"
+      },
+      "position": [
+        660,
+        3700
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "560dc3bb-386d-4dd6-93e5-f2e60a422f10",
+      "name": "Feedback check",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// The job behind the answer: it must exist and be done, and it must not be rated yet – a second answer is a\n// refusal with its own code, never a silent overwrite.\nconst v = $('Validate feedback').first().json;\nconst row = $input.first().json || {};\nconst fail = (code, message, status) => [{ json: { ok: false, statusCode: status, body: { error: { code, message } } } }];\nif (!row.id) return fail('not_found', 'job not found', 404);\nif (row.status !== 'done') return fail('not_ready', `job is ${row.status}: only a finished job can be rated`, 409);\nif (row.rated) return fail('already_rated', 'this job has already been rated', 409);\nreturn [{ json: { ...v } }];\n"
+      },
+      "position": [
+        880,
+        3700
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "43f0e565-6508-4fb5-a84d-f32a71c64a7f",
+      "name": "Feedback ok?",
+      "parameters": {
+        "conditions": {
+          "combinator": "and",
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.ok }}",
+              "operator": {
+                "operation": "true",
+                "singleValue": true,
+                "type": "boolean"
+              },
+              "rightValue": ""
+            }
+          ],
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          }
+        },
+        "options": {}
+      },
+      "position": [
+        1100,
+        3700
+      ],
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3
+    },
+    {
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "18278ed0-ae04-4f0e-8d77-ba43b1196295",
+      "name": "Insert feedback",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id, $json.fits, $json.easy, $json.comment, $json.via] }}"
+        },
+        "query": "insert into feedback (job_id, fits, easy, comment, via) values ($1, $2::int, $3::int, nullif($4, '-'), $5) on conflict (job_id) do nothing returning job_id"
+      },
+      "position": [
+        1320,
+        3700
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "ed2238f1-7706-4a68-81f3-0a941810862d",
+      "name": "Feedback saved",
+      "onError": "continueErrorOutput",
+      "parameters": {
+        "jsCode": "// on conflict do nothing: two answers arriving together – the second sees no returned row and gets 409 too.\nconst row = $input.first().json || {};\nif (!row.job_id) return [{ json: { statusCode: 409, body: { error: { code: 'already_rated', message: 'this job has already been rated' } } } }];\nreturn [{ json: { statusCode: 201, body: { ok: true, job_id: row.job_id } } }];\n"
+      },
+      "position": [
+        1540,
+        3700
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "687d359a-a835-4646-8d98-b4d7367ac1a3",
+      "name": "Respond feedback",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        1760,
+        3700
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "id": "1d1d15a1-2f3a-4a4d-ba27-2f99f631d3ac",
+      "name": "Internal error",
+      "parameters": {
+        "jsCode": "// The error output item of the failed node: {error: message} or {error: {message}}; secrets masked as elsewhere.\nconst it = $input.first().json || {};\nconst raw = it.message || (it.error && typeof it.error === 'object' ? (it.error.message || it.error.description || JSON.stringify(it.error)) : (it.error || 'unknown failure'));\nconst mask = (t) => String(t).replace(/\\b(sk|gsk|rk|xai)[-_][^\\s\"'\\\\]{6,}/g, (m) => m.slice(0, 3) + '***').replace(/\\b[A-Za-z0-9_-]{32,}\\b/g, '***').replace(/(Bearer|Token)\\s+[^\\s\"']+/gi, '$1 ***');\nconst where = $prevNode.name;\n// Which endpoint ran (one webhook per execution) and its job id, for the event; the client gets a neutral body:\n// in a few days this is a public page, node names, tables and addresses stay in events and docker logs.\nconst HOOKS = { 'Webhook probe': 'probe', 'Webhook jobs': 'create', 'Webhook job status': 'status', 'Webhook retry': 'retry', 'Webhook export': 'export', 'Webhook media': 'media', 'Webhook feedback': 'feedback', 'Webhook limits': 'limits' };\nlet endpoint = 'api', job_id = '-';\nfor (const [name, ep] of Object.entries(HOOKS)) { try { if ($(name).isExecuted) { endpoint = ep; job_id = String((($(name).first().json || {}).query || {}).job_id || '-'); break; } } catch (e) { /* not this one */ } }\nconst detail = `${endpoint} at ${where}: ${mask(raw).slice(0, 240)}`;\nconsole.log(`[video-digest] internal_error ${detail}`);\nreturn [{ json: { statusCode: 500, body: { error: { code: 'internal_error', message: 'internal error on our side, try again later' } }, job_id, events: [{ type: 'internal_error', level: 'error', stage: endpoint, body: detail }] } }];\n"
+      },
+      "position": [
+        2860,
+        3300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "42c9f39c-4123-484c-94da-6763515ff486",
+      "name": "Log internal error",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "log-events",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            },
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "events",
+              "id": "events",
+              "removed": false,
+              "required": false,
+              "type": "array"
+            }
+          ],
+          "value": {
+            "events": "={{ $json.events || [] }}",
+            "job_id": "={{ $json.job_id || ($json.job && $json.job.id) || '' }}"
+          }
+        }
+      },
+      "position": [
+        3080,
+        3300
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    },
+    {
+      "id": "67c6df0a-e6ad-4056-ae50-9de930d4d8ec",
+      "name": "Respond 500",
+      "parameters": {
+        "options": {
+          "responseCode": 500
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        3300,
+        3300
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

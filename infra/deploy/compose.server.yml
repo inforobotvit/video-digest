@@ -1,0 +1,96 @@
+# Production compose (docs/self-hosting.md).
+# Started by activate-image.sh from the app root (for example /opt/<app>) as
+#   docker compose --project-directory <app root> -f releases/<SHA>/infra/deploy/compose.server.yml up
+# so `.env` resolves to <app root>/.env and this file is taken from the release being activated.
+# Images video-digest-media/-web are built by deploy.sh from the same release and tagged by the full commit SHA.
+# Nothing is published on 0.0.0.0: a reverse proxy on the host sends the domain to 127.0.0.1:8080.
+name: video-digest
+
+services:
+  postgres:
+    image: postgres:16
+    env_file: .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ${RELEASE_DIR:?RELEASE_DIR is required}/infra/sql:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  media:
+    image: ${MEDIA_IMAGE:?MEDIA_IMAGE is required}
+    env_file: .env
+    volumes:
+      - mediadata:/data
+    # healthcheck comes from media-service/Dockerfile
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n:2.37.10
+    env_file: .env
+    environment:
+      # Workflows read MEDIA_URL etc. via $env, so addresses are not baked into the JSON.
+      N8N_BLOCK_ENV_ACCESS_IN_NODE: "false"
+      # Prompts are read from the release mount, not duplicated inside nodes.
+      N8N_RESTRICT_FILE_ACCESS_TO: /data
+      # system nginx -> web (nginx) -> n8n
+      N8N_PROXY_HOPS: "2"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+    # n8n editor port on the host: 5679, bound to loopback only; the editor is not public.
+    ports: ["127.0.0.1:5679:5678"]
+    volumes:
+      - n8ndata:/home/node/.n8n
+      - ${RELEASE_DIR}/n8n/prompts:/data/prompts:ro
+      - ${RELEASE_DIR}/n8n/fixtures:/data/fixtures:ro
+      - ${RELEASE_DIR}/n8n/pricing.json:/data/pricing.json:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      media:
+        condition: service_healthy
+      gotenberg:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5678/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+    restart: unless-stopped
+
+  gotenberg:
+    # HTML -> PDF for /api/jobs/{id}/export/digest.pdf. The image has curl but no HEALTHCHECK of its own.
+    image: gotenberg/gotenberg:8
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  web:
+    # nginx + frontend dist, built from infra/web.Dockerfile with infra/nginx.conf inside.
+    image: ${WEB_IMAGE:?WEB_IMAGE is required}
+    ports: ["127.0.0.1:8080:80"]
+    depends_on:
+      n8n:
+        condition: service_started
+      media:
+        condition: service_started
+    healthcheck:
+      # /health is proxied to the media service, so this checks nginx and the upstream path together.
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  mediadata:
+  n8ndata:

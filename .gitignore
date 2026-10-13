@@ -1,0 +1,9 @@
+.env
+node_modules/
+dist/
+__pycache__/
+.venv/
+*.pyc
+data/
+.DS_Store
+Video-Digest-spec.*

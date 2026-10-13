@@ -1,0 +1,260 @@
+{
+  "connections": {
+    "Answer chat": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond chat",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Answer listen": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond listen",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Control": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Respond control",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Stub chat": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Answer chat",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Stub control GET": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Control",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Stub control POST": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Control",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Stub listen": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Answer listen",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "name": "provider-stub",
+  "nodes": [
+    {
+      "name": "Stub control POST",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "stub-control",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        0
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1
+    },
+    {
+      "name": "Stub control GET",
+      "parameters": {
+        "httpMethod": "GET",
+        "options": {},
+        "path": "stub-control",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        200
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1
+    },
+    {
+      "name": "Control",
+      "parameters": {
+        "jsCode": "// POST: set the scenario and reset the counters and the log. GET: show them.\nconst st = $getWorkflowStaticData('global');\nconst inp = $input.first().json;\nif (String(inp.method || '').toUpperCase() === 'POST' || (inp.body && Object.keys(inp.body).length)) {\n  const b = inp.body || {};\n  st.scenario = { chat: Array.isArray(b.chat) ? b.chat.map(String) : [], listen: Array.isArray(b.listen) ? b.listen.map(String) : [] };\n  st.calls = { chat: 0, listen: 0 };\n  st.log = [];\n}\nreturn [{ json: { statusCode: 200, body: { scenario: st.scenario || null, calls: st.calls || null, log: st.log || [] } } }];\n"
+      },
+      "position": [
+        240,
+        100
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "name": "Respond control",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Retry-After",
+                "value": "={{ $json.retry_after || '' }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        480,
+        100
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "name": "Stub chat",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {},
+        "path": "stub/chat/completions",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        500
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1
+    },
+    {
+      "name": "Answer chat",
+      "parameters": {
+        "jsCode": "// Shared by the chat and listen answers: the scenario is a list of answers per endpoint, one per call, set by\n// POST /webhook/stub-control {chat: [...], listen: [...]}; after the list is used up every call gets 200.\n// Entries: '200', '429', '429:ra=5' (Retry-After 5), '429:quota' (OpenAI insufficient_quota), '402' (Deepgram credit),\n// '400:language' (Deepgram unknown language), '500', '503'. Every call is logged with its time for the pauses check.\nconst st = $getWorkflowStaticData('global');\nst.scenario = st.scenario || { chat: [], listen: [] };\nst.calls = st.calls || { chat: 0, listen: 0 };\nst.log = st.log || [];\nfunction answer(kind, req) {\n  const n = st.calls[kind]++;\n  const entry = String((st.scenario[kind] || [])[n] || '200');\n  const [codeStr, ...flags] = entry.split(':');\n  const code = Number(codeStr) || 200;\n  const flag = flags.join(':');\n  const m = flag.match(/^ra=(\\d+)$/);\n  const retry_after = m ? m[1] : '';\n  st.log.push({ t: new Date().toISOString(), kind, call: n + 1, entry });\n  return { code, flag, retry_after, n };\n}\n\nconst req = $input.first().json.body || {};\nconst a = answer('chat', req);\nlet body;\nif (a.code === 200 && a.flag === 'empty') {\n  body = { id: 'stub', object: 'chat.completion', model: 'stub-model', choices: [{ index: 0, message: { role: 'assistant', content: JSON.stringify({ paragraphs: [] }) }, finish_reason: 'stop' }], usage: { prompt_tokens: 100, completion_tokens: 5 } };\n} else if (a.code === 200) {\n  // A clean-shaped answer built from the request: the TRANSCRIPT lines of the last user message, five lines a paragraph.\n  // The transcript is in the first user message (the correction turn of attempt 2 carries only the error text);\n  // paragraphs of at most 200 words so the answer passes the paragraph rules of clean.\n  const msgs = Array.isArray(req.messages) ? req.messages : [];\n  const user = msgs.find((x) => x.role === 'user' && String(x.content || '').includes('TRANSCRIPT'));\n  const src = String((user && user.content) || '').split('\\nTRANSCRIPT\\n').pop();\n  const lines = src.split('\\n').map((l) => l.match(/^\\[(\\d+(?:\\.\\d+)?)\\]\\s*(.*)$/)).filter(Boolean);\n  const paragraphs = [];\n  for (const l of lines) { const ws = l[2].split(/\\s+/).filter(Boolean); for (let i = 0; i < ws.length; i += 200) paragraphs.push({ start: Number(l[1]), text: ws.slice(i, i + 200).join(' ') }); }\n  body = { id: 'stub', object: 'chat.completion', model: 'stub-model', choices: [{ index: 0, message: { role: 'assistant', content: JSON.stringify({ paragraphs }) }, finish_reason: 'stop' }], usage: { prompt_tokens: 100, completion_tokens: 50 } };\n} else if (a.code === 429 && a.flag === 'quota') {\n  body = { error: { message: 'You exceeded your current quota, please check your plan and billing details.', type: 'insufficient_quota', code: 'insufficient_quota' } };\n} else if (a.code === 429) {\n  body = { error: { message: 'Rate limit reached for requests', type: 'requests', code: 'rate_limit_exceeded' } };\n} else {\n  body = { error: { message: `stub answers ${a.code}`, type: 'server_error', code: null } };\n}\nreturn [{ json: { statusCode: a.code, body, retry_after: a.retry_after } }];\n"
+      },
+      "position": [
+        240,
+        500
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "name": "Respond chat",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Retry-After",
+                "value": "={{ $json.retry_after || '' }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        480,
+        500
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    },
+    {
+      "name": "Stub listen",
+      "parameters": {
+        "httpMethod": "POST",
+        "options": {
+          "rawBody": true
+        },
+        "path": "stub/listen",
+        "responseMode": "responseNode"
+      },
+      "position": [
+        0,
+        800
+      ],
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1
+    },
+    {
+      "name": "Answer listen",
+      "parameters": {
+        "jsCode": "// Shared by the chat and listen answers: the scenario is a list of answers per endpoint, one per call, set by\n// POST /webhook/stub-control {chat: [...], listen: [...]}; after the list is used up every call gets 200.\n// Entries: '200', '429', '429:ra=5' (Retry-After 5), '429:quota' (OpenAI insufficient_quota), '402' (Deepgram credit),\n// '400:language' (Deepgram unknown language), '500', '503'. Every call is logged with its time for the pauses check.\nconst st = $getWorkflowStaticData('global');\nst.scenario = st.scenario || { chat: [], listen: [] };\nst.calls = st.calls || { chat: 0, listen: 0 };\nst.log = st.log || [];\nfunction answer(kind, req) {\n  const n = st.calls[kind]++;\n  const entry = String((st.scenario[kind] || [])[n] || '200');\n  const [codeStr, ...flags] = entry.split(':');\n  const code = Number(codeStr) || 200;\n  const flag = flags.join(':');\n  const m = flag.match(/^ra=(\\d+)$/);\n  const retry_after = m ? m[1] : '';\n  st.log.push({ t: new Date().toISOString(), kind, call: n + 1, entry });\n  return { code, flag, retry_after, n };\n}\n\nconst a = answer('listen', {});\nlet body;\nif (a.code === 200 && a.flag === 'short') {\n  body = { metadata: { duration: 30, models: ['stub'], model_info: { stub: { name: 'nova-3', version: 'stub' } } }, results: { utterances: [{ start: 0.5, end: 29, transcript: 'одно два три четыре пять шесть семь восемь девять десять одиннадцать двенадцать тринадцать четырнадцать пятнадцать', speaker: 0 }] } };\n} else if (a.code === 200) {\n  body = { metadata: { duration: 600, models: ['stub'], model_info: { stub: { name: 'nova-3', version: 'stub' } } },\n           results: { utterances: [{ start: 0.5, end: 590, transcript: 'слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10 слово11 слово12 слово13 слово14 слово15 слово16 слово0 слово1 слово2 слово3 слово4 слово5 слово6 слово7 слово8 слово9 слово10', speaker: 0 }] } };\n} else if (a.code === 402) {\n  body = { err_code: 'ASR_PAYMENT_REQUIRED', err_msg: 'Project does not have enough credits for an ASR request and does not have an overage agreement.', request_id: 'stub' };\n} else if (a.code === 400) {\n  body = { err_code: 'Bad Request', err_msg: 'Bad Request: No such model/language/tier combination found.', request_id: 'stub' };\n} else if (a.code === 429) {\n  body = { err_code: 'TOO_MANY_REQUESTS', err_msg: 'Too many requests. Please try again later', request_id: 'stub' };\n} else {\n  body = { error_code: 'Service Unavailable', err_msg: 'Please try again later', request_id: 'stub' };\n}\nreturn [{ json: { statusCode: a.code, body, retry_after: a.retry_after } }];\n"
+      },
+      "position": [
+        240,
+        800
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "name": "Respond listen",
+      "parameters": {
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Retry-After",
+                "value": "={{ $json.retry_after || '' }}"
+              }
+            ]
+          }
+        },
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}"
+      },
+      "position": [
+        480,
+        800
+      ],
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false
+  }
+}

@@ -1,0 +1,680 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://video-digest/schemas/result.schema.json",
+  "title": "Video Digest result",
+  "description": "Machine-readable twin of docs/result-schema.md (v1.0). The markdown wins on any discrepancy. Semantic rules of section 9 (starts within duration, quotes found in transcript.clean, verdict needs sources, tldr <= 80 words) are checked by n8n/scripts/validate_result.py, not here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "job_id",
+    "source",
+    "preset",
+    "options",
+    "output_language",
+    "transcript",
+    "digest",
+    "extras",
+    "meta"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "job_id": {
+      "type": "string",
+      "pattern": "^j_[a-z0-9]{6}$"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "preset": {
+      "enum": [
+        "lecture",
+        "meeting",
+        "talk",
+        "interview",
+        "plain"
+      ]
+    },
+    "options": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/option"
+      }
+    },
+    "output_language": {
+      "$ref": "#/$defs/lang"
+    },
+    "transcript": {
+      "$ref": "#/$defs/transcript"
+    },
+    "digest": {
+      "$ref": "#/$defs/digest"
+    },
+    "extras": {
+      "$ref": "#/$defs/extras"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "notices": {
+      "type": "array",
+      "description": "What changes what the reader reads (2026-09-23): transcript_shortened – clean kept less than the rule allows and the correction did not bring it all back; clean_fallback – chunks cleaned by rules without the model. places counts the units, starts lists their timecodes (sorted, unique, at most 40). Style warnings stay in jobs.meta.quality_warnings.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "places",
+          "starts"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "transcript_shortened",
+              "clean_fallback"
+            ]
+          },
+          "places": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "starts": {
+            "type": "array",
+            "maxItems": 40,
+            "items": {
+              "$ref": "#/$defs/timecode"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "lang": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "ISO 639-1"
+    },
+    "timecode": {
+      "type": "number",
+      "minimum": 0,
+      "description": "seconds from the start of the video"
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "option": {
+      "enum": [
+        "glossary",
+        "critique",
+        "self_check",
+        "action_items",
+        "decisions",
+        "questions"
+      ]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "url",
+        "platform",
+        "title",
+        "duration_sec",
+        "thumbnail_url",
+        "language",
+        "language_detected_by",
+        "language_confidence",
+        "playback"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "url",
+            "upload"
+          ]
+        },
+        "url": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "platform": {
+          "type": "string",
+          "description": "yt-dlp extractor name or 'upload'"
+        },
+        "title": {
+          "type": "string"
+        },
+        "duration_sec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "thumbnail_url": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "language": {
+          "$ref": "#/$defs/lang"
+        },
+        "language_detected_by": {
+          "enum": [
+            "subtitles",
+            "whisper",
+            "request",
+            "llm"
+          ],
+          "description": "request: the code came from the job as is, the STT provider detected nothing (Deepgram with a fixed language)"
+        },
+        "language_confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "null when the provider reports no probability (OpenAI whisper-1, Deepgram with a fixed language)"
+        },
+        "playback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "url",
+            "has_video"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "youtube",
+                "vk",
+                "rutube",
+                "direct",
+                "audio"
+              ]
+            },
+            "url": {
+              "type": "string"
+            },
+            "has_video": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "text",
+        "speaker"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/timecode"
+        },
+        "end": {
+          "$ref": "#/$defs/timecode"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "speaker": {
+          "$ref": "#/$defs/nullableString",
+          "description": "Deepgram: \"<chunk>:<n>\", the speaker number is local to the audio chunk, there is no cross-chunk identity; null for subtitles and whisper"
+        }
+      }
+    },
+    "paragraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "text"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/timecode"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "transcript": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "origin",
+        "segments",
+        "clean",
+        "stats"
+      ],
+      "properties": {
+        "origin": {
+          "enum": [
+            "subtitles_manual",
+            "subtitles_auto",
+            "whisper",
+            "deepgram"
+          ]
+        },
+        "segments": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/segment"
+          }
+        },
+        "clean": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/paragraph"
+          }
+        },
+        "stats": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "words",
+            "segments",
+            "speakers"
+          ],
+          "properties": {
+            "words": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "segments": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "speakers": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 1,
+              "description": "null: not measured (whisper separates nobody, Deepgram numbers speakers per chunk)"
+            }
+          }
+        }
+      }
+    },
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tldr",
+        "key_points",
+        "structure",
+        "quotes"
+      ],
+      "properties": {
+        "tldr": {
+          "type": "string",
+          "minLength": 1
+        },
+        "key_points": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "detail",
+              "start"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "detail": {
+                "type": "string"
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              }
+            }
+          }
+        },
+        "structure": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "description": "Parts sorted by start, contiguous: structure[0].start = 0, structure[i].end = structure[i+1].start, last end = source.duration_sec. Not expressible in JSON Schema; enforced by n8n/scripts/validate_result.py and the digest-reduce check in n8n.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "start",
+              "end",
+              "summary"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              },
+              "end": {
+                "$ref": "#/$defs/timecode"
+              },
+              "summary": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "quotes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "description": "translation is required and non-empty when output_language differs from source.language, null otherwise (checked by validate_result.py and llm-call).",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "translation",
+              "start",
+              "speaker"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "translation": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              },
+              "speaker": {
+                "$ref": "#/$defs/nullableString"
+              }
+            }
+          }
+        }
+      }
+    },
+    "timedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "start"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "$ref": "#/$defs/timecode"
+        }
+      }
+    },
+    "extras": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Only ordered blocks are present; each key is optional.",
+      "properties": {
+        "glossary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "term",
+              "definition",
+              "start"
+            ],
+            "properties": {
+              "term": {
+                "type": "string",
+                "minLength": 1
+              },
+              "definition": {
+                "type": "string"
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              }
+            }
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timedText"
+          }
+        },
+        "action_items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "owner",
+              "due",
+              "start"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "owner": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "due": {
+                "$ref": "#/$defs/nullableString"
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              }
+            }
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timedText"
+          }
+        },
+        "critique": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "strong",
+            "weak",
+            "missing"
+          ],
+          "properties": {
+            "strong": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "weak": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "claim",
+                  "issue",
+                  "start"
+                ],
+                "properties": {
+                  "claim": {
+                    "type": "string"
+                  },
+                  "issue": {
+                    "type": "string"
+                  },
+                  "start": {
+                    "$ref": "#/$defs/timecode"
+                  }
+                }
+              }
+            },
+            "missing": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "self_check": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "question",
+              "answer",
+              "start"
+            ],
+            "properties": {
+              "question": {
+                "type": "string"
+              },
+              "answer": {
+                "type": "string"
+              },
+              "start": {
+                "$ref": "#/$defs/timecode"
+              }
+            }
+          }
+        }
+      }
+    },
+    "stage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "status",
+        "ms",
+        "cost_usd"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "probe",
+            "download",
+            "transcribe",
+            "clean",
+            "digest",
+            "extras",
+            "fact_check"
+          ],
+          "description": "fact_check: stage of results stored before 2026-09-17 only, never produced anything"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "running",
+            "done",
+            "failed",
+            "skipped"
+          ]
+        },
+        "ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "cost_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "provider": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "model_actual": {
+          "type": "string",
+          "description": "the model id from the provider's answer (OpenAI snapshot, Deepgram name and build), next to the requested model"
+        },
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "created_at",
+        "finished_at",
+        "stages",
+        "total_cost_usd",
+        "tokens"
+      ],
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "finished_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "stages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stage"
+          }
+        },
+        "total_cost_usd": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "in",
+            "out"
+          ],
+          "properties": {
+            "in": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "out": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        }
+      }
+    }
+  }
+}

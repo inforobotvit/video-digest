@@ -1,0 +1,26 @@
+name: Docker
+
+# Build-only check of the media-service image on release tags. Nothing is pushed:
+# there is no registry and no secrets in this repository.
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  media-service-image:
+    name: media-service image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: media-service
+          platforms: linux/amd64
+          push: false
+          tags: video-digest-media:${{ github.ref_name }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

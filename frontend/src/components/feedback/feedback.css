@@ -1,0 +1,148 @@
+/* UMUX-Lite dialog (step E2). A quiet panel over the page; the page keeps its layout. */
+.fb {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.fb__overlay {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.35);
+  cursor: default;
+}
+.fb__panel {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  background: var(--bg-surface);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
+  font: 400 14px/1.5 var(--font-sans);
+}
+.fb__title {
+  margin: 0 0 6px;
+  font: 600 18px/1.3 var(--font-sans);
+}
+.fb__text {
+  margin: 0 0 16px;
+  color: var(--fg-secondary);
+}
+.fb__scale {
+  border: 0;
+  padding: 0;
+  margin: 0 0 14px;
+}
+.fb__label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.fb__stars {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.fb__starrow {
+  display: inline-flex;
+  align-items: center;
+}
+.fb__end {
+  color: var(--fg-muted);
+  font-size: 12px;
+}
+/* A star is a 36px target on the desktop and 44px under a finger; the glyph is the same. */
+.fb__star {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 6px;
+  padding: 0;
+  background: none;
+  color: var(--underline);
+  cursor: pointer;
+}
+.fb__star--on {
+  color: var(--fg);
+}
+.fb__star:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: -2px;
+}
+@media (max-width: 720px) {
+  .fb__stars {
+    flex-wrap: wrap;
+    gap: 2px 0;
+  }
+  .fb__starrow {
+    flex-basis: 100%;
+    justify-content: space-between;
+  }
+  .fb__star {
+    width: 44px;
+    height: 44px;
+  }
+  .fb__end--low {
+    order: 1;
+    margin-right: auto;
+  }
+  .fb__end--high {
+    order: 2;
+  }
+}
+.fb__field {
+  display: block;
+  margin: 4px 0 12px;
+}
+.fb__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font: inherit;
+  color: inherit;
+  background: var(--bg-muted);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+.fb__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+.fb__hint {
+  display: block;
+  color: var(--fg-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.fb__counter {
+  color: var(--fg-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+.fb__error {
+  margin: 0 0 10px;
+  color: #b3261e;
+}
+.fb__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.fb__thanks .btn {
+  margin-top: 4px;
+}

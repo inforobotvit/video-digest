@@ -1,0 +1,51 @@
+{
+  "_comment": "USD prices used for jobs.meta cost accounting. Checked against the OpenAI pricing page on 2026-09-06, gpt-5.6-luna on 2026-09-16, Deepgram nova-3 (pay-as-you-go batch) on 2026-09-17. per_minute for STT models, per 1M tokens for LLMs. supports_temperature: false = the model accepts only its default temperature, llm-call then omits the parameter; absent = sent as usual. Deepgram is billed at the list price even while the starter credit pays for it: a zero price would move the cost of a job and the size of the daily budget on the day the credit ends.",
+  "stt": {
+    "whisper-1": {
+      "per_minute": 0.006
+    },
+    "gpt-4o-mini-transcribe": {
+      "per_minute": 0.003
+    },
+    "gpt-4o-transcribe": {
+      "per_minute": 0.006
+    },
+    "whisper-large-v3": {
+      "per_minute": 0.00185
+    },
+    "whisper-large-v3-turbo": {
+      "per_minute": 0.00067
+    },
+    "nova-3": {
+      "per_minute": 0.00433
+    }
+  },
+  "llm": {
+    "gpt-4o-mini": {
+      "input_per_1m": 0.15,
+      "output_per_1m": 0.6
+    },
+    "gpt-4.1-mini": {
+      "input_per_1m": 0.4,
+      "output_per_1m": 1.6
+    },
+    "gpt-5-mini": {
+      "input_per_1m": 0.25,
+      "output_per_1m": 2.0
+    },
+    "gpt-4.1": {
+      "input_per_1m": 2.0,
+      "output_per_1m": 8.0
+    },
+    "gpt-4o": {
+      "input_per_1m": 2.5,
+      "output_per_1m": 10.0
+    },
+    "gpt-5.6-luna": {
+      "input_per_1m": 0.2,
+      "cached_input_per_1m": 0.02,
+      "output_per_1m": 1.2,
+      "supports_temperature": false
+    }
+  }
+}

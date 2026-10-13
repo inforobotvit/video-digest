@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    name: Detect changed paths
+    runs-on: ubuntu-latest
+    outputs:
+      media: ${{ steps.filter.outputs.media }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+      schemas: ${{ steps.filter.outputs.schemas }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            media:
+              - 'media-service/**'
+              - '.github/workflows/ci.yml'
+            frontend:
+              - 'frontend/**'
+              - 'schemas/**'
+              - '.github/workflows/ci.yml'
+            schemas:
+              - 'schemas/**'
+              - 'docs/**'
+              - 'n8n/fixtures/**'
+              - 'n8n/scripts/validate_result.py'
+              - '.github/workflows/ci.yml'
+
+  media-service:
+    name: media-service
+    needs: changes
+    # workflow_dispatch has no diff base: run everything on a manual start.
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.media == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: media-service
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+          enable-cache: true
+          cache-dependency-glob: media-service/uv.lock
+      # Real-ffmpeg tests are skipped without the binary; install it so they run.
+      - name: Install ffmpeg
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends ffmpeg
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      # Network tests are deselected by addopts in pyproject.toml.
+      - run: uv run pytest -rs
+
+  frontend:
+    name: frontend
+    needs: changes
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm test
+      - run: npm run build
+      # Playwright against the mock (e2e/README.md); the @live tests need compose and stay local.
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+      # Screenshots are committed and looked at by eye; the CI copies are for comparison, not a gate.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frontend-e2e
+          path: |
+            frontend/e2e/screenshots
+            frontend/e2e/.report
+            frontend/e2e/.results
+          if-no-files-found: ignore
+          retention-days: 14
+
+  schemas:
+    name: schemas
+    needs: changes
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.schemas == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.12"
+      - name: Validate result fixtures
+        run: |
+          failed=0
+          for f in n8n/fixtures/result-sample.json n8n/fixtures/real/*.json; do
+            uv run --no-project --with 'jsonschema[format]' n8n/scripts/validate_result.py "$f" || failed=1
+          done
+          exit "$failed"

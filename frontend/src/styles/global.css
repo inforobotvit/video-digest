@@ -1,0 +1,64 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+/* Column so the footer (.foot, margin-top: auto) sits at the bottom of short pages. */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 400 14px/1.5 var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+.mono {
+  font-family: var(--font-mono);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Hyphenation for running text; controls and headings wrap on words only. */
+.tldr__text,
+.point,
+.para,
+.chapter__summary,
+.mcard__quote,
+.mcard__translation,
+.xs__item,
+.xs__disclaimer,
+.banner__body,
+.settings__hint,
+.check__hint,
+.svc__text,
+.policy p,
+.wait__note {
+  hyphens: auto;
+  /* Long words only, four letters on each side: no "Postgre-SQL" or "тези-сы". */
+  hyphenate-limit-chars: 8 4 4;
+}

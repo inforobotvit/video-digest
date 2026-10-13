@@ -1,0 +1,12 @@
+node_modules
+dist
+*.local
+.DS_Store
+e2e/.results
+e2e/.report
+
+# e2e screenshots are taken in CI only (artifact frontend-e2e); local runs on macOS regenerate all of them with font differences
+e2e/screenshots/
+
+# TypeScript incremental build state
+*.tsbuildinfo

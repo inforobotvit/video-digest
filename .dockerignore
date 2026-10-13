@@ -1,0 +1,18 @@
+# Context for infra/web.Dockerfile is the repo root; keep everything the build does not need out of it.
+.git
+.github
+.DS_Store
+**/.env
+**/.env.*
+!**/.env.example
+**/node_modules
+**/dist
+**/__pycache__
+**/.venv
+**/data
+frontend/e2e/.report
+frontend/e2e/.results
+frontend/e2e/screenshots
+media-service
+docs
+infra/deploy

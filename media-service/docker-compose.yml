@@ -1,0 +1,15 @@
+# Standalone dev compose for media-service. Service and volume names match infra/docker-compose.yml.
+services:
+  media:
+    build:
+      context: .
+      args:
+        YTDLP_VERSION: "2026.08.19"
+    env_file: .env
+    ports: ["8000:8000"]
+    volumes:
+      - mediadata:/data
+    restart: unless-stopped
+
+volumes:
+  mediadata:

@@ -1,0 +1,449 @@
+{
+  "connections": {
+    "Every hour": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Expire results",
+            "type": "main"
+          },
+          {
+            "index": 0,
+            "node": "Stuck jobs",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Expire results": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Expired items",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Expired items": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Media delete expired",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Mark timed out": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Restore timeout item",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Media delete expired": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Restore expired item",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Restore expired item": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Strip expired job",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Restore expired item 2": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Log expiry",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Restore timeout item": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Log timeout",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Strip expired job": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Restore expired item 2",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Stuck jobs": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Timeout items",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Timeout items": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Mark timed out",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "name": "maintenance",
+  "nodes": [
+    {
+      "id": "32aa31c3-2eb3-4680-915d-1b42e7e43691",
+      "name": "Every hour",
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "position": [
+        0,
+        0
+      ],
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2
+    },
+    {
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "82d800ab-499f-42a9-9412-3ae906bd1bc5",
+      "name": "Stuck jobs",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [Number($env.MAX_JOB_MINUTES || 60)] }}"
+        },
+        "query": "select id, stages, created_at, coalesce((select value::numeric from settings where key = 'MAX_JOB_MINUTES' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $1::numeric) as max_job_minutes from jobs where status in ('queued', 'processing') and created_at < now() - (coalesce((select value::numeric from settings where key = 'MAX_JOB_MINUTES' and value ~ '^[0-9]+(\\.[0-9]+)?$'), $1::numeric) * interval '1 minute')"
+      },
+      "position": [
+        220,
+        300
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "5ff12613-9a7d-4df2-8b62-848ee5e57cbf",
+      "name": "Timeout items",
+      "parameters": {
+        "jsCode": "// One item per stuck job: the running (or first pending) stage becomes failed, error carries the reason.\nreturn $input.all().map((i) => i.json).filter((r) => r && r.id).map((r) => {\n  const minutes = Number(r.max_job_minutes) || Number($env.MAX_JOB_MINUTES || 60);\n  const stages = Array.isArray(r.stages) ? r.stages : [];\n  const stuck = stages.find((s) => s.status === 'running') || stages.find((s) => s.status === 'pending') || { name: 'pipeline' };\n  const newStages = stages.map((s) => (s.name === stuck.name ? { ...s, status: 'failed' } : s));\n  const message = `job exceeded MAX_JOB_MINUTES=${minutes}: stuck at ${stuck.name} since ${r.created_at}`;\n  return { json: {\n    job_id: r.id, p_error: JSON.stringify({ stage: stuck.name, code: 'timeout', message: 'processing took too long' }), p_stages: JSON.stringify(newStages),\n    events: [{ type: 'job_timeout', level: 'error', stage: stuck.name, body: message }],\n  } };\n});\n"
+      },
+      "position": [
+        440,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "fc66c638-d13d-41b3-8d97-bb9374bbbfb4",
+      "name": "Mark timed out",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id, $json.p_error, $json.p_stages] }}"
+        },
+        "query": "update jobs set status = 'failed', error = $2::jsonb, stages = $3::jsonb, finished_at = now(), updated_at = now() where id = $1 and status in ('queued', 'processing')"
+      },
+      "position": [
+        660,
+        300
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "076802d5-781a-4b4f-bea5-0847d3d88054",
+      "name": "Restore timeout item",
+      "parameters": {
+        "jsCode": "// Postgres replaced the items; put them all back for the events log.\nreturn $('Timeout items').all();"
+      },
+      "position": [
+        880,
+        300
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "49ecd660-ca2f-4041-b76c-2c9e0350c333",
+      "name": "Log timeout",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "log-events",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            },
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "events",
+              "id": "events",
+              "removed": false,
+              "required": false,
+              "type": "array"
+            }
+          ],
+          "value": {
+            "events": "={{ $json.events || [] }}",
+            "job_id": "={{ $json.job_id || ($json.job && $json.job.id) || '' }}"
+          }
+        }
+      },
+      "position": [
+        1100,
+        300
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    },
+    {
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "70d994bf-4a3a-4e8d-81da-09f2f9252764",
+      "name": "Expire results",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [Number($env.RESULT_RETENTION_DAYS || 30)] }}"
+        },
+        "query": "select id, status, source_id, source, meta, error, finished_at from jobs where status in ('done', 'failed') and finished_at < now() - make_interval(days => $1) and (meta->>'expired_at') is null"
+      },
+      "position": [
+        220,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "f295e9bb-26ce-47d8-8c29-febc0e96b49a",
+      "name": "Expired items",
+      "parameters": {
+        "jsCode": "// One item per expired job: reduced source/meta/error for the update, the original source_id for the media delete.\nconst days = Number($env.RESULT_RETENTION_DAYS || 30);\nconst now = new Date().toISOString();\nreturn $input.all().map((i) => i.json).filter((r) => r && r.id).map((r) => {\n  const src = r.source || {};\n  const source = { type: src.type || null, platform: src.platform || null, duration_sec: src.duration_sec ?? null, language: src.language || null, title: null, url: null, thumbnail_url: null };\n  const meta = { ...(r.meta || {}) };\n  delete meta.quality_warnings;\n  if (Array.isArray(meta.stages)) meta.stages = meta.stages.map((st) => { const { dropped_quotes, ...rest } = st || {}; return rest; });\n  meta.expired_at = now;\n  const error = r.error && typeof r.error === 'object' ? { stage: r.error.stage || null, code: r.error.code || null } : null;\n  return { json: {\n    job_id: r.id, source_id: r.source_id,\n    p_source: JSON.stringify(source), p_meta: JSON.stringify(meta), p_error: JSON.stringify(error),\n    events: [{ type: 'result_expired', level: 'info', stage: 'maintenance', body: `${r.status} job expired: finished ${r.finished_at}, retention ${days} days; content and identifying fields removed` }],\n  } };\n});\n"
+      },
+      "position": [
+        440,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "Media Service API"
+        }
+      },
+      "id": "a32bf583-d79e-49bd-8a75-a77d54e5b87f",
+      "name": "Media delete expired",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "authentication": "predefinedCredentialType",
+        "method": "DELETE",
+        "nodeCredentialType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 60000
+        },
+        "url": "={{ $env.MEDIA_URL }}/sources/{{ $json.source_id }}"
+      },
+      "position": [
+        660,
+        0
+      ],
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5
+    },
+    {
+      "id": "295c8828-5bf0-43e9-8355-b5f00f4f0d42",
+      "name": "Restore expired item",
+      "parameters": {
+        "jsCode": "// The HTTP node replaced the items; put every job item back for the update ($('X').item in run-once mode returns one).\nreturn $('Expired items').all();"
+      },
+      "position": [
+        880,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "100fde88-94e5-4d0f-9f53-c92dffaa6cc1",
+      "name": "Strip expired job",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id, $json.p_source, $json.p_meta, $json.p_error] }}"
+        },
+        "query": "update jobs set result = null, source = $2::jsonb, source_id = 'expired', meta = $3::jsonb, error = $4::jsonb, updated_at = now() where id = $1"
+      },
+      "position": [
+        1100,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "de2bf180-a077-442c-9e55-a911526cefcc",
+      "name": "Restore expired item 2",
+      "parameters": {
+        "jsCode": "// Postgres replaced the items; put them all back for the events log.\nreturn $('Expired items').all();"
+      },
+      "position": [
+        1320,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "f39c6898-2091-4128-ad28-d50284e31480",
+      "name": "Log expiry",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "log-events",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            },
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "events",
+              "id": "events",
+              "removed": false,
+              "required": false,
+              "type": "array"
+            }
+          ],
+          "value": {
+            "events": "={{ $json.events || [] }}",
+            "job_id": "={{ $json.job_id || ($json.job && $json.job.id) || '' }}"
+          }
+        }
+      },
+      "position": [
+        1540,
+        0
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

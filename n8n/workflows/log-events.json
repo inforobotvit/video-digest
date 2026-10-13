@@ -1,0 +1,93 @@
+{
+  "connections": {
+    "Event rows": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Insert event",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "When events arrive": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Event rows",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "name": "log-events",
+  "nodes": [
+    {
+      "id": "79349952-2cb2-4ff1-8678-d9d63ab3083b",
+      "name": "When events arrive",
+      "parameters": {
+        "inputSource": "workflowInputs",
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "job_id",
+              "type": "string"
+            },
+            {
+              "name": "events",
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "position": [
+        0,
+        0
+      ],
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.2
+    },
+    {
+      "id": "c8483c4d-36e0-4bc0-8bc4-05b2807f33cb",
+      "name": "Event rows",
+      "parameters": {
+        "jsCode": "// One row per event (contract section 4), over every input item: the caller may hand over several jobs at\n// once (maintenance expiring a batch); reading only the first item lost the rest (found 2026-09-17).\n// Masking is repeated here: nothing key-shaped reaches the table.\nconst mask = (t) => String(t).replace(/\\b(sk|gsk|rk|xai)[-_][^\\s\"'\\\\]{6,}/g, (m) => m.slice(0, 3) + '***').replace(/\\b[A-Za-z0-9_-]{32,}\\b/g, '***').replace(/(Bearer|Token)\\s+[^\\s\"']+/gi, '$1 ***');\n// '-' and 0 stand for null: the Postgres node drops empty query parameters.\nreturn $input.all().flatMap((item) => {\n  const inp = item.json || {};\n  const events = Array.isArray(inp.events) ? inp.events : [];\n  return events.filter((e) => e && e.type).map((e) => ({ json: {\n    job_id: String(inp.job_id || '-'), stage: String(e.stage || '-'), type: String(e.type), level: String(e.level || 'info'),\n    provider: String(e.provider || '-'), model: String(e.model || '-'), http_status: Number(e.http_status) || 0,\n    body: mask(e.body || '').slice(0, 300) || '-', retention_days: Number($env.EVENTS_RETENTION_DAYS || 7),\n  } }));\n});\n"
+      },
+      "position": [
+        220,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "5bd9121f-5779-4f6a-9fbf-3c9244f8d73c",
+      "name": "Insert event",
+      "onError": "continueRegularOutput",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id, $json.stage, $json.type, $json.level, $json.provider, $json.model, $json.http_status, $json.body, $json.retention_days] }}"
+        },
+        "query": "with gc as (delete from events where ts < now() - ($9::int * interval '1 day'))\ninsert into events (job_id, stage, type, level, provider, model, http_status, body)\nvalues (nullif($1, '-'), nullif($2, '-'), $3, $4, nullif($5, '-'), nullif($6, '-'), nullif($7::int, 0), nullif($8, '-'))"
+      },
+      "position": [
+        440,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

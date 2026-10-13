@@ -1,0 +1,224 @@
+{
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Error info",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Error info": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Load job by execution",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Load job by execution": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Mark params",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Mark failed by execution": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Restore error item",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Mark params": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Mark failed by execution",
+            "type": "main"
+          }
+        ]
+      ]
+    },
+    "Restore error item": {
+      "main": [
+        [
+          {
+            "index": 0,
+            "node": "Log internal error",
+            "type": "main"
+          }
+        ]
+      ]
+    }
+  },
+  "name": "on-error",
+  "nodes": [
+    {
+      "id": "efdeee12-ccc9-4aef-aba8-b0ce57c94eb2",
+      "name": "Error Trigger",
+      "parameters": {},
+      "position": [
+        0,
+        0
+      ],
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1
+    },
+    {
+      "id": "52efc2ff-6057-42de-838f-c71160df1774",
+      "name": "Error info",
+      "parameters": {
+        "jsCode": "// Error Trigger payload: execution.id, execution.lastNodeExecuted, execution.error.message, workflow.name.\nconst e = $input.first().json || {};\nconst ex = e.execution || {};\nconst mask = (t) => String(t).replace(/\\b(sk|gsk|rk|xai)[-_][^\\s\"'\\\\]{6,}/g, (m) => m.slice(0, 3) + '***').replace(/\\b[A-Za-z0-9_-]{32,}\\b/g, '***').replace(/(Bearer|Token)\\s+[^\\s\"']+/gi, '$1 ***');\nconst message = mask((ex.error || {}).message || 'unknown error').slice(0, 240);\nreturn [{ json: { execution_id: String(ex.id || ''), node: String(ex.lastNodeExecuted || '?'), workflow: String((e.workflow || {}).name || ''), message } }];\n"
+      },
+      "position": [
+        220,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "a6d2ebfe-92f6-41d2-ba61-f2f55615ffb1",
+      "name": "Load job by execution",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.execution_id || '-'] }}"
+        },
+        "query": "select id, status, stages from jobs where meta->>'execution_id' = $1"
+      },
+      "position": [
+        440,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "a4fdfbd2-87ca-4592-bc63-7e91c807d898",
+      "name": "Mark params",
+      "parameters": {
+        "jsCode": "// The job behind the execution: only a job still in processing is closed; anything else is left as it is.\nconst info = $('Error info').first().json;\nconst rows = $input.all().map((i) => i.json).filter((r) => r && r.id);\nconst out = [];\nfor (const r of rows) {\n  if (r.status !== 'processing') { console.log(`[video-digest] on-error: job ${r.id} is ${r.status}, nothing to do (execution ${info.execution_id}, node ${info.node})`); continue; }\n  const stages = Array.isArray(r.stages) ? r.stages : [];\n  const stuck = stages.find((s) => s.status === 'running') || stages.find((s) => s.status === 'pending') || { name: 'pipeline' };\n  const newStages = stages.map((s) => (s.name === stuck.name ? { ...s, status: 'failed' } : s));\n  out.push({ json: {\n    job_id: r.id, p_error: JSON.stringify({ stage: stuck.name, code: 'internal_error', message: 'internal error on our side' }), p_stages: JSON.stringify(newStages),\n    events: [{ type: 'internal_error', level: 'error', stage: stuck.name, body: `${info.workflow} execution ${info.execution_id} failed at ${info.node}: ${info.message}` }],\n  } });\n}\nreturn out;\n"
+      },
+      "position": [
+        660,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "credentials": {
+        "postgres": {
+          "name": "VideoDigest Postgres"
+        }
+      },
+      "id": "03a5d9d1-b4a3-4897-951b-170644cd1a53",
+      "name": "Mark failed by execution",
+      "parameters": {
+        "operation": "executeQuery",
+        "options": {
+          "queryReplacement": "={{ [$json.job_id, $json.p_error, $json.p_stages] }}"
+        },
+        "query": "update jobs set status = 'failed', error = $2::jsonb, stages = $3::jsonb, finished_at = now(), updated_at = now() where id = $1 and status = 'processing'"
+      },
+      "position": [
+        880,
+        0
+      ],
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.7
+    },
+    {
+      "id": "608dfa68-28a5-451c-9be6-3e0a48f7c3ac",
+      "name": "Restore error item",
+      "parameters": {
+        "jsCode": "// Postgres replaced the item; put the event back for the log.\nreturn $('Mark params').all();"
+      },
+      "position": [
+        1100,
+        0
+      ],
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2
+    },
+    {
+      "id": "fc63a9a6-0f64-45e1-a55c-4e6b5582742e",
+      "name": "Log internal error",
+      "parameters": {
+        "options": {
+          "waitForSubWorkflow": false
+        },
+        "workflowId": {
+          "__rl": true,
+          "cachedResultName": "log-events",
+          "mode": "list",
+          "value": ""
+        },
+        "workflowInputs": {
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false,
+          "mappingMode": "defineBelow",
+          "matchingColumns": [],
+          "schema": [
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "job_id",
+              "id": "job_id",
+              "removed": false,
+              "required": false,
+              "type": "string"
+            },
+            {
+              "canBeUsedToMatch": true,
+              "defaultMatch": false,
+              "display": true,
+              "displayName": "events",
+              "id": "events",
+              "removed": false,
+              "required": false,
+              "type": "array"
+            }
+          ],
+          "value": {
+            "events": "={{ $json.events || [] }}",
+            "job_id": "={{ $json.job_id || ($json.job && $json.job.id) || '' }}"
+          }
+        }
+      },
+      "position": [
+        1320,
+        0
+      ],
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3
+    }
+  ],
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

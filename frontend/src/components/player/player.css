@@ -1,0 +1,327 @@
+/* Player bar (directions, turn 5 / 5b): fixed to the bottom, 72px, expands to 176px with a picture. */
+body[data-player='open'] {
+  --player-h: 176px;
+}
+.player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--player-h);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  z-index: 20;
+}
+.player--open {
+  align-items: stretch;
+  gap: 20px;
+  padding: 16px 24px;
+}
+.player__media {
+  flex: none;
+  width: 256px;
+  border-radius: var(--radius-s);
+  background: #18181b;
+  overflow: hidden;
+}
+.player__media iframe,
+.player__media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #18181b;
+}
+/*
+ * Collapsed: the frame stays in the DOM, unclipped and inside the viewport, scaled down to about
+ * 2 x 1 px. Platform players (Rutube for one) initialise and play only while their frame
+ * intersects the viewport; display: none, opacity: 0 behind overflow: hidden or unmounting
+ * leaves them idle until the picture is expanded.
+ */
+.player__media--hidden {
+  position: absolute;
+  left: 24px;
+  top: 8px;
+  width: 256px;
+  height: 144px;
+  transform: scale(0.01);
+  transform-origin: 0 0;
+  border-radius: 0;
+  pointer-events: none;
+}
+.player__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.player__body--open {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 8px;
+}
+.player__play {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-fg);
+  cursor: pointer;
+}
+.player__time {
+  flex: none;
+  width: 118px;
+  font: 500 13px var(--font-mono);
+  color: var(--fg);
+  white-space: nowrap;
+}
+.player__time b {
+  font-weight: 500;
+}
+.player__time span {
+  color: var(--fg-faint);
+  font-weight: 400;
+}
+.player__strip {
+  flex: 1;
+  min-width: 0;
+}
+.player__sep {
+  flex: none;
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+}
+.player__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.player__titles {
+  min-width: 0;
+}
+.player__title {
+  font: 500 14px/1.35 var(--font-sans);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.player__hint {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--fg-muted);
+}
+.player__actions {
+  display: flex;
+  gap: 6px;
+  flex: none;
+}
+
+/* --- buttons in the bar --- */
+.pbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  background: var(--bg-surface);
+  font: 500 12.5px var(--font-sans);
+  color: var(--fg-secondary);
+  text-decoration: none;
+  cursor: pointer;
+}
+.pbtn:hover {
+  border-color: var(--fg-faint);
+}
+.pbtn--mono {
+  font: 500 12.5px var(--font-mono);
+  color: var(--fg);
+  min-width: 42px;
+  justify-content: center;
+}
+.pbtn--icon {
+  width: 30px;
+  padding: 0;
+  justify-content: center;
+}
+.pbtn--ghost {
+  width: 30px;
+  padding: 0;
+  justify-content: center;
+  border-color: transparent;
+  background: transparent;
+}
+
+/* --- chapter strip --- */
+.strip {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  height: 8px;
+}
+.strip__seg {
+  position: relative;
+  flex-basis: 0;
+  min-width: 2px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--c) 30%, var(--bg-surface));
+  cursor: pointer;
+}
+.strip__seg--past {
+  background: var(--c);
+}
+.strip__played {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--c);
+  border-radius: 2px 0 0 2px;
+  pointer-events: none;
+}
+.strip__head {
+  position: absolute;
+  top: -4px;
+  width: 2px;
+  height: 16px;
+  margin-left: -1px;
+  background: var(--fg);
+  border-radius: 1px;
+  pointer-events: none;
+}
+.strip__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--fg-secondary);
+  white-space: nowrap;
+}
+.strip__chapter {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.strip__chapter .player__time {
+  width: auto;
+  margin-right: 12px;
+}
+.strip__swatch {
+  flex: none;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+.strip__failed {
+  color: var(--objection);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.strip__left {
+  flex: none;
+  font-family: var(--font-mono);
+  color: var(--fg-faint);
+}
+
+/* Mobile (turn 4a): fixed bar, strip 6px on top, then play · time and chapter · rate · picture. */
+@media (max-width: 720px) {
+  body {
+    --player-h: 88px;
+  }
+  body[data-player='open'] {
+    /* 16:9 picture across the 358px column, plus the bar */
+    --player-h: calc(88px + 56.25vw - 8px);
+  }
+  .player--mobile {
+    display: block;
+    height: auto;
+    padding: 10px 16px 14px;
+  }
+  .player--mobile .player__media {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-bottom: 10px;
+  }
+  .player--mobile .player__media--hidden {
+    position: absolute;
+    left: 16px;
+    top: 4px;
+    width: 256px;
+    height: 144px;
+    margin: 0;
+    aspect-ratio: auto;
+  }
+  .player--mobile .strip,
+  .player--mobile .strip__seg {
+    height: 6px;
+  }
+  .player--mobile .strip__head {
+    top: -4px;
+    height: 14px;
+  }
+  .player__mrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .player--mobile .player__play {
+    width: 40px;
+    height: 40px;
+  }
+  .player__mid {
+    flex: 1;
+    min-width: 0;
+  }
+  .player--mobile .player__time {
+    width: auto;
+  }
+  .player__mchapter {
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--fg-secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .player__mchapter .strip__swatch {
+    width: 7px;
+    height: 7px;
+  }
+  .player--mobile .pbtn {
+    height: 34px;
+  }
+  .player--mobile .pbtn--icon,
+  .player--mobile .pbtn--ghost {
+    width: 34px;
+  }
+  .pbtn--on {
+    border-color: var(--accent);
+    color: var(--fg);
+  }
+}

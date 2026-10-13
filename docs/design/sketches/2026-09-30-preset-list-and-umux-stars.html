@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Набросок: пресеты списком и звёзды UMUX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fafafa; --card:#fff; --ink:#1a1a1a; --muted:#6b6b6b; --line:#e6e6e6; --line-strong:#1a1a1a;
+    --accent:#1a1a1a; --star:#d9d9d9; --star-on:#1a1a1a; --hover:#f3f3f3;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 "IBM Plex Sans",system-ui,sans-serif}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 16px 64px}
+  h1{font-size:22px;margin:0 0 6px}
+  .lead{color:var(--muted);margin:0 0 36px}
+  h2{font-size:15px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;color:var(--muted);margin:40px 0 14px}
+  .note{color:var(--muted);font-size:14px;margin:10px 0 0}
+
+  /* — как сейчас — */
+  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;min-height:150px;position:relative;hyphens:auto}
+  .card.sel{border:2px solid var(--line-strong)}
+  .card .t{font-weight:600;margin:0 0 10px;padding-right:26px}
+  .card .d{color:var(--muted);font-size:15px;margin:0}
+  .card .r{position:absolute;top:14px;right:14px;width:18px;height:18px;border:1.5px solid #cfcfcf;border-radius:50%}
+  .card.sel .r{background:var(--ink);border-color:var(--ink)}
+  .card.sel .r::after{content:"";position:absolute;left:5px;top:2px;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+  /* — предложение: список — */
+  .list{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .row{display:flex;align-items:baseline;gap:14px;padding:14px 18px;border-top:1px solid var(--line);cursor:pointer}
+  .row:first-child{border-top:0}
+  .row:hover{background:var(--hover)}
+  .row input{position:absolute;opacity:0;pointer-events:none}
+  .dot{flex:0 0 18px;width:18px;height:18px;border:1.5px solid #cfcfcf;border-radius:50%;position:relative;top:3px}
+  .row.sel .dot{border:5px solid var(--ink)}
+  .row .t{font-weight:600;flex:0 0 150px}
+  .row .d{color:var(--muted)}
+  .row.sel .d{color:var(--ink)}
+  @media (max-width:560px){
+    .row{flex-wrap:wrap;gap:4px 14px}
+    .row .t{flex:0 0 auto}
+    .row .d{flex-basis:100%;padding-left:32px;font-size:15px}
+  }
+
+  /* — компактный вариант в одну колонку-«чип» — */
+  .phone{width:360px;border:1px solid var(--line);border-radius:28px;padding:18px 12px;background:#fff;margin-top:14px}
+
+  /* — UMUX звёзды — */
+  .umux{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;max-width:560px}
+  .umux h3{font-size:18px;margin:0 0 4px}
+  .umux .sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .q{margin:0 0 18px}
+  .q .s{font-weight:500;margin:0 0 8px}
+  .stars{display:flex;align-items:center;gap:6px}
+  .star{width:34px;height:34px;border:0;background:none;padding:0;cursor:pointer;color:var(--star);font-size:30px;line-height:1}
+  .star.on{color:var(--star-on)}
+  .stars .lbl{color:var(--muted);font-size:13px;margin-left:6px}
+  .stars .lbl.first{margin-left:0;margin-right:6px}
+  textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;resize:vertical;min-height:72px}
+  .hint{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-top:6px}
+  .btns{display:flex;gap:10px;margin-top:16px}
+  .btn{border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:9px 16px;font:inherit;cursor:pointer}
+  .btn.ghost{background:none;color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Набросок для E4</h1>
+  <p class="lead">Пресеты списком вместо плиток и звёзды в опросе. Кликабельно, цифры и тексты условные.</p>
+
+  <h2>Как сейчас</h2>
+  <div class="cards">
+    <div class="card"><div class="r"></div><p class="t">Лекция</p><p class="d">Структура, тезисы, глоссарий и вопросы для самопроверки</p></div>
+    <div class="card"><div class="r"></div><p class="t">Совещание</p><p class="d">Решения, задачи с ответственными, открытые вопросы</p></div>
+    <div class="card"><div class="r"></div><p class="t">Доклад</p><p class="d">Главная мысль, аргументы, цитаты и критика</p></div>
+    <div class="card"><div class="r"></div><p class="t">Интервью</p><p class="d">Позиции собеседников, где расходятся, цитаты</p></div>
+    <div class="card sel"><div class="r"></div><p class="t">Просто выжимка</p><p class="d">TL;DR, структура и тезисы. Без дополнительных блоков</p></div>
+  </div>
+  <p class="note">Пять колонок дают каждой около 200 px, отсюда переносы по слогам и пустой низ у коротких карточек.</p>
+
+  <h2>Предложение: список</h2>
+  <div class="list" id="list">
+    <label class="row sel"><input type="radio" name="p" checked><span class="dot"></span><span class="t">Просто выжимка</span><span class="d">TL;DR, структура, тезисы</span></label>
+    <label class="row"><input type="radio" name="p"><span class="dot"></span><span class="t">Лекция</span><span class="d">Структура, тезисы, глоссарий, вопросы для самопроверки</span></label>
+    <label class="row"><input type="radio" name="p"><span class="dot"></span><span class="t">Доклад</span><span class="d">Главная мысль, аргументы, цитаты, критика</span></label>
+    <label class="row"><input type="radio" name="p"><span class="dot"></span><span class="t">Интервью</span><span class="d">Позиции собеседников, расхождения, цитаты</span></label>
+    <label class="row"><input type="radio" name="p"><span class="dot"></span><span class="t">Совещание</span><span class="d">Решения, задачи с ответственными, открытые вопросы</span></label>
+  </div>
+  <p class="note">Заголовок в фиксированной колонке, описание в одну строку. Выбранная строка: заполненный кружок и описание чёрным. Порядок — по частоте: выжимка первой.</p>
+
+  <h2>То же на телефоне</h2>
+  <div class="phone">
+    <div class="list" id="list2">
+      <label class="row sel"><input type="radio" name="q" checked><span class="dot"></span><span class="t">Просто выжимка</span><span class="d">TL;DR, структура, тезисы</span></label>
+      <label class="row"><input type="radio" name="q"><span class="dot"></span><span class="t">Лекция</span><span class="d">Структура, тезисы, глоссарий, вопросы для самопроверки</span></label>
+      <label class="row"><input type="radio" name="q"><span class="dot"></span><span class="t">Доклад</span><span class="d">Главная мысль, аргументы, цитаты, критика</span></label>
+      <label class="row"><input type="radio" name="q"><span class="dot"></span><span class="t">Интервью</span><span class="d">Позиции собеседников, расхождения, цитаты</span></label>
+      <label class="row"><input type="radio" name="q"><span class="dot"></span><span class="t">Совещание</span><span class="d">Решения, задачи с ответственными, открытые вопросы</span></label>
+    </div>
+  </div>
+  <p class="note">Уже 560 px описание уходит под заголовок — та же разметка, только перенос.</p>
+
+  <h2>Опрос: звёзды вместо цифр</h2>
+  <div class="umux">
+    <h3>Как вам результат?</h3>
+    <p class="sub">Два вопроса, полминуты.</p>
+    <div class="q">
+      <p class="s">Возможности сервиса соответствуют моим требованиям</p>
+      <div class="stars" data-stars>
+        <span class="lbl first">не согласен</span>
+        <button class="star" aria-label="1">★</button><button class="star" aria-label="2">★</button><button class="star" aria-label="3">★</button><button class="star" aria-label="4">★</button><button class="star" aria-label="5">★</button>
+        <span class="lbl">полностью согласен</span>
+      </div>
+    </div>
+    <div class="q">
+      <p class="s">Сервисом легко пользоваться</p>
+      <div class="stars" data-stars>
+        <span class="lbl first">не согласен</span>
+        <button class="star" aria-label="1">★</button><button class="star" aria-label="2">★</button><button class="star" aria-label="3">★</button><button class="star" aria-label="4">★</button><button class="star" aria-label="5">★</button>
+        <span class="lbl">полностью согласен</span>
+      </div>
+    </div>
+    <textarea placeholder="Что было бы полезно? Необязательно"></textarea>
+    <div class="hint"><span>Не указывайте персональные данные: имена, телефоны, адреса, почту.</span><span>0/500</span></div>
+    <div class="btns"><button class="btn">Отправить</button><button class="btn ghost">Не сейчас</button></div>
+  </div>
+  <p class="note">Клик по третьей звезде зажигает первые три. Подписи у краёв оставляют шкале смысл согласия: звёзды сами по себе читаются как «оценка товара», а вопросы у нас про согласие с утверждением.</p>
+</div>
+<script>
+  for (const list of document.querySelectorAll('.list')) {
+    list.addEventListener('change', e => {
+      for (const r of list.querySelectorAll('.row')) r.classList.toggle('sel', r.querySelector('input').checked);
+    });
+  }
+  for (const g of document.querySelectorAll('[data-stars]')) {
+    const stars = [...g.querySelectorAll('.star')];
+    const paint = n => stars.forEach((s, i) => s.classList.toggle('on', i < n));
+    stars.forEach((s, i) => {
+      s.addEventListener('click', () => { g.dataset.value = i + 1; paint(i + 1); });
+      s.addEventListener('mouseenter', () => paint(i + 1));
+    });
+    g.addEventListener('mouseleave', () => paint(Number(g.dataset.value || 0)));
+  }
+</script>
+</body>
+</html>
