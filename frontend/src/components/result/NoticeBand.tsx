@@ -9,7 +9,8 @@ export type Notice = NonNullable<VideoDigestResult['notices']>[number];
  * result.notices as the reader sees them (result-schema section 2): a quiet band next to the document –
  * the transcript may have been shortened, or part of it was cleaned by rules without the model. Number
  * and places only; the places are timecodes that seek the player like every other timecode on the page.
- * Not a modal, not a red banner: an honest caveat, not an incident.
+ * Not a modal, not a red banner: an honest caveat, not an incident. It sits in a .row like the text, so its
+ * left edge and width come from the text column at every breakpoint.
  */
 export function NoticeBand({
   notices,
@@ -20,10 +21,13 @@ export function NoticeBand({
 }) {
   if (!notices?.length) return null;
   return (
-    <section className="notices" aria-label={S.notices.label}>
-      {notices.map((n) => (
-        <NoticeItem key={n.kind} notice={n} onSeek={onSeek} />
-      ))}
+    <section className="row row--notices" aria-label={S.notices.label}>
+      <div className="row__gutter" />
+      <div className="row__text notices">
+        {notices.map((n) => (
+          <NoticeItem key={n.kind} notice={n} onSeek={onSeek} />
+        ))}
+      </div>
     </section>
   );
 }
